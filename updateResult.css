@@ -1,0 +1,77 @@
+
+.navbar{
+    background-color:#fff;
+    
+    box-shadow: 2px 4px 2px #ddd;
+}
+ .sidebar{
+    background-color:rgb(255, 135, 0);
+    /* height: 650px; */
+    box-shadow: 2px 4px 2px #ddd;
+    
+    
+    }
+    
+    .sidebar .cont{
+    
+    margin-top: 50px;
+    padding: auto;
+   
+    font-size: larger;
+
+
+}
+.sidebar .cont li{
+    /* padding: 20px; */
+    box-shadow:  0 1px 2px;
+    margin-top: 40px;
+    /* text-align: center; */
+    
+    
+    }
+    .sidebar .cont li a,.fa{
+    color: black;
+    
+    margin: 10px;
+
+}
+.sidebar .cont li :hover{
+    background-color: #fff;
+    box-shadow:  0 1px 2px #ddd;
+
+}
+
+.main-content table {
+    margin-top: 10%;
+    box-shadow: 0 2px 2px 2px #ddd;
+    width: 20%;
+    font-size: small;
+}
+.main-content table tr{
+    width: 5%;
+}
+
+.main-content{
+    position: relative;
+}
+.wrapp-table{
+  position: absolute;
+
+left: 1%;
+  
+    
+}
+
+.wrapp-table table td, input{
+    width: 150px;
+}
+.main-content table #view-td{
+    color: rgb(255, 135, 0);
+    font-size: large;
+    font-weight: 400;
+    border: 2px solid;
+}
+
+
+
+

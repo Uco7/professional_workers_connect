@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student profile Profile Page</title>
+    <link rel="stylesheet" href="/css/studentProfile.css">
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+                     
+
+    <div class="container wrapp" id="complaintSection" >
+     <h2 class="" id="bio">student bio Data</h2>
+     <form class="row g-3" action="/submit/complaint/form" method="post" enctype="multipart/form-data">
+         <div class="container text-center">
+            <img src="\profil.jpg" alt="profile image" style="width: 200px; height: 200px; border-radius: 10px;">
+         </div>
+         
+       
+         
+         <div class="col-md-6">
+             <label for="matric" class="form-label">First Name</label>
+             <input type="text" class="form-control" name="department" disabled>
+ 
+         </div>
+         <div class="col-md-6">
+             <label for="matric" class="form-label">Last Name</label>
+             <input type="text" class="form-control" name="department" disabled>
+ 
+         </div>
+         <div class="col-md-6">
+             <label for="matric" class="form-label">Middle Name</label>
+             <input type="text" class="form-control" name="department" disabled>
+ 
+         </div>
+         <div class="col-md-6">
+             <label for="department" class="form-label">Department</label>
+             <input type="text" class="form-control" name="department" disabled>
+         </div>
+         <div class="col-md-6">
+             <label for="email" class="form-label">Email</label>
+             <input type="email" class="form-control" name="email"  required>
+         </div>
+         <div class="col-md-6">
+             <label for="phone_no" class="form-label">Phone Number</label>
+             <input type="text" class="form-control" name="phone_no"  required>
+         </div>
+         <div class="col-md-6">
+             <label for="course_title" class="form-label"> Residential Address</label>
+             <input type="text" class="form-control" name="course_title" placeholder="Enter course title" required>
+         </div>
+         <div class="col-md-6">
+             <label for="course_code" class="form-label">State of origin</label>
+             <input type="text" class="form-control" name="course_code" placeholder="Enter course code" required>
+         </div>
+         <div class="col-md-6">
+             <label for="complaint_date" class="form-label">LGA</label>
+             <input type="date" class="form-control" name="complaint_date" required>
+         </div>
+         <div class="col-md-6">
+             <label for="level" class="form-label">Matric Number</label>
+             <input type="number" class="form-control" name="level" placeholder="Provide the related level" required>
+         </div>
+       
+        
+         <div class="col-12">
+             <button type="submit" class="btn btn-success">Save</button>
+         </div>
+     </form>
+ </div>
+                    
+                 </div>
+
+ 
+</body>
+</html>

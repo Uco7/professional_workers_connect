@@ -1,0 +1,93 @@
+
+.navbar{
+    background-color:#fff;
+    
+    box-shadow: 2px 4px 2px #ddd;
+}
+.sidebar{
+    background-color:rgb(255, 135, 0);
+  
+    box-shadow: 2px 4px 2px #ddd;
+    
+    
+    }
+      
+
+ .sidebar{
+    background-color:rgb(255, 135, 0);
+    /* height: 650px; */
+    box-shadow: 2px 4px 2px #ddd;
+    
+    
+    }
+    
+    .sidebar .cont{
+    
+    margin-top: 50px;
+    padding: auto;
+   
+    font-size: larger;
+
+
+}
+.sidebar .cont li{
+
+    box-shadow:  0 1px 2px;
+    margin-top: 40px;
+  
+    
+    
+    }
+    .sidebar .cont li a,.fa{
+    color: black;
+    
+    margin: 10px;
+
+}
+.sidebar .cont li :hover{
+    background-color: #fff;
+    box-shadow:  0 1px 2px #ddd;
+
+}
+.resolve-complaint{
+    background-color: #fff;
+    box-shadow: 0 2px 2px 2px #ddd;
+    margin-top: 5%;
+}
+.table-responsive {
+    overflow-x: auto;
+}
+.table thead th {
+    white-space: nowrap;
+}
+@media (max-width: 767px) {
+    .sidebar {
+        display: none;
+    }
+    .main-content {
+        margin: 0;
+        padding: 0;
+    }
+}
+.wrapp-box {
+    padding: 20px;
+}
+.box-cont {
+    padding: 20px;
+}
+.resolve-complaint {
+  
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.text-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.custom-search-input {
+    margin-bottom: 20px;
+}
+.dataTables_filter {
+    display: none; /* Hide the default search box */
+}

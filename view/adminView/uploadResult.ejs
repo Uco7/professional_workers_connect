@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upload Result Page</title>
+    <link rel="stylesheet" href="/css/uploadResult.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">    
+</head>
+<body>
+<!-- including admin navbar -->
+<%- include('_includeFolder/adminNav') %>
+<!-- including admin navbar -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <!-- including admin sidebar -->
+                <%- include('_includeFolder/_adminSideBar') %>
+                <!-- including admin sidebar -->
+            </div>
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+                <div class="wrapp-table">
+                    <form id="registrationForm" action="/admin/upload/result" method="POST">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="first_name" class="form-label">Full Name:</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="last_name" class="form-label">Matric:</label>
+                                    <input type="text" class="form-control" id="matric" name="matric" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Department:</label>
+                                    <input type="text" class="form-control" id="department" name="department" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="section" class="form-label">Section:</label>
+                                    <select name="section" id="section" class="form-control" required>
+                                        <option value="">Choose section</option>
+                                        <option value="2023/2024">2023/2024</option>
+                                        <option value="2024/2026">2024/2026</option>
+                                        <option value="2026/2027">2026/2027</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="level" class="form-label">Level:</label>
+                                    <select name="level" id="level" class="form-control" required>
+                                        <option value="">Choose level</option>
+                                        <option value="100">100</option>
+                                        <option value="200">200</option>
+                                        <option value="300">300</option>
+                                        <option value="400">400</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="semester" class="form-label">Semester:</label>
+                                    <select name="semester" id="semester" class="form-control" required>
+                                        <option value="">Choose semester</option>
+                                        <option value="first">First Semester</option>
+                                        <option value="second">Second Semester</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapp-table">
+                            <table class="table table-bordered table1">
+                                <thead>
+                                    <tr>
+                                        <th>COURSE TITLE</th>
+                                        <th>COURSE CODE</th>
+                                        <th>COURSE UNIT</th>
+                                        <th>ASSESSMENT1</th>
+                                        <th>ASSESSMENT2</th>
+                                        <th>EXAM SCORE</th>
+                                        <th>TOTAL SCORE</th>
+                                        <th>GRADE</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="coursesTableBody">
+                                    <tr>
+                                        <td data-label="COURSE TITLE"><input type="text" name="courses[0][course_title]" required></td>
+                                        <td data-label="COURSE CODE"><input type="text" name="courses[0][course_code]" required></td>
+                                        <td data-label="COURSE UNIT"><input type="number" name="courses[0][course_unit]" required></td>
+                                        <td data-label="ASSESSMENT1"><input type="number" name="courses[0][assessment1]" required></td>
+                                        <td data-label="ASSESSMENT2"><input type="number" name="courses[0][assessment2]" required></td>
+                                        <td data-label="EXAM SCORE"><input type="number" name="courses[0][exam_score]" required></td>
+                                        <td data-label="TOTAL SCORE"><input type="number" name="courses[0][total_score]" required></td>
+                                        <td data-label="GRADE"><input type="text" name="courses[0][grade]" required></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="button" id="addCourse">Add more field</button>
+                            <button type="submit">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let courseIndex = 1;
+
+            document.getElementById('addCourse').addEventListener('click', function () {
+                const tbody = document.getElementById('coursesTableBody');
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td data-label="COURSE TITLE"><input type="text" name="courses[${courseIndex}][course_title]" required></td>
+                    <td data-label="COURSE CODE"><input type="text" name="courses[${courseIndex}][course_code]" required></td>
+                    <td data-label="COURSE UNIT"><input type="number" name="courses[${courseIndex}][course_unit]" required></td>
+                    <td data-label="ASSESSMENT1"><input type="number" name="courses[${courseIndex}][assessment1]" required></td>
+                    <td data-label="ASSESSMENT2"><input type="number" name="courses[${courseIndex}][assessment2]" required></td>
+                    <td data-label="EXAM SCORE"><input type="number" name="courses[${courseIndex}][exam_score]" required></td>
+                    <td data-label="TOTAL SCORE"><input type="number" name="courses[${courseIndex}][total_score]" required></td>
+                    <td data-label="GRADE"><input type="text" name="courses[${courseIndex}][grade]" required></td>
+                `;
+                
+                tbody.appendChild(row);
+                courseIndex++;
+            });
+        });
+    </script>
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>

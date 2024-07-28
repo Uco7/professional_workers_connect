@@ -1,0 +1,282 @@
+/* body{
+    background-color: mintcream !important;
+} */
+.navbar{
+    background-color:#fff;
+    
+    box-shadow: 2px 4px 2px #ddd;
+}
+.navbar .log-out{
+    color: rgb(255, 135, 0);
+    padding: 5px;
+    font-size: x-large;
+    font-weight: 600;
+    text-shadow:  0 2px 1px rgb(236, 236, 240);
+}
+.notification{
+    position: relative;
+}
+.notification #red{
+    position: absolute;
+    left: 8px;
+    bottom: 1rem;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    align-items: center;
+    font-weight: 600;
+     font-size: 10px;
+     color: #fff;
+    background-color: red;
+   
+
+
+}
+.accordion{
+    /* width: 500px;
+    position: absolute;
+    left: 20%; */
+    /* display: none; */
+    background-color: aqua;
+
+}
+ .sidebar{
+    background-color:rgb(255, 135, 0);
+    /* height: 650px; */
+    box-shadow: 2px 4px 2px #ddd;
+    
+    
+    }
+    
+    .sidebar .cont{
+    
+    margin-top: 50px;
+    padding: auto;
+   
+    font-size: larger;
+
+
+}
+.sidebar .cont li{
+    /* padding: 20px; */
+    box-shadow:  0 1px 2px;
+    margin-top: 40px;
+    /* text-align: center; */
+    
+    
+    }
+    .sidebar .cont li a,.fa{
+    color: rgb(252, 247, 247);
+    
+    margin: 10px;
+
+}
+.sidebar .cont li :hover{
+    background-color: #fff;
+    box-shadow:  0 1px 2px #ddd;
+
+}
+.box-cont{
+    
+    font-size: larger;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    
+}
+.box-cont .box1{
+    width: 250px;
+    background-color:#fff ;
+    height: 200px;
+    box-shadow: 0 2px 2px 2px #ddd;
+    padding: 10px;
+    font-size: larger;
+    font-weight: 600;
+}
+.box-cont .box1 .fig, .text{
+    margin: 30px 10px ;
+    text-transform: capitalize;
+    text-shadow: 0 4px 4px  #ddd;
+}
+.box-cont .icon{
+    position: absolute;
+    left: 15%;
+    top: 5%;
+    font-size: 200%;
+ color:  rgb(255, 135, 0);
+ 
+}
+.box-cont .icon1{
+    position: absolute;
+    left: 40%;
+    top: 5%;
+    font-size: 200%;
+ color:  rgb(255, 135, 0);
+}
+.box-cont .icon2{
+    position: absolute;
+    left: 65%;
+    top: 5%;
+    font-size: 200%;
+ color:  rgb(255, 135, 0);
+}
+.box-cont  .icon3{
+    position: absolute;
+    left: 90%;
+    top: 5%;
+    font-size: 200%;
+ color:  rgb(255, 135, 0);
+}
+
+.main-content table {
+    margin-top: 10%;
+    box-shadow: 0 2px 2px 2px #ddd;
+    
+}
+.main-content table td{
+    border: none;
+   
+ 
+}
+.main-content{
+    position: relative;
+}
+.wrapp-table{
+    display: flex;
+    flex-direction: row;
+    
+    margin-left: -100px;
+}
+.wrapp-table{
+    position: relative;
+}
+.resolve-complaint{
+    background-color: #fff;
+    display: flex;
+    box-shadow: 0 2px 2px 2px #ddd;
+   
+    padding: 10px;
+    
+    
+
+  }
+  .resolve-complaint{
+    position: absolute;
+    top:3em;
+    left: 8.5em;
+    width: 50%;
+
+  }
+.resolve-complaint .text-heading{
+    margin-left: 20px;
+}
+.resolve-complaint .view-resolve{
+    margin-left: 40px;
+    background-color: rgb(255, 135, 0);
+    box-shadow: 0 2px 2px 2px #ddd;
+    padding: 5px;
+    border-radius: 10px;
+    color: #fff;
+    }
+    .resolve-complaint .view-resolve a{
+        padding: 5px;
+            border-radius: 10px;
+            text-decoration: none;
+           color: white;
+    }
+    .main-content table #view-td{
+        color: rgb(255, 135, 0);
+        font-size: large;
+        font-weight: 400;
+        }
+        .main-content table #view-td a{
+            background-color: rgb(255, 135, 0);
+            padding: 5px;
+            border-radius: 10px;
+            text-decoration: none;
+           color: white;
+
+}
+.main-content .table1{
+  
+   position: absolute;
+   width: 50%;
+   left: 10%;
+
+}
+.main-content .table2 {
+    position: absolute;
+    width: 500px;
+    left: 62%;
+    /* top: ; */
+    
+   
+}
+.main-content .resolve-complaint1{
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+  
+
+    
+}
+.main-content .resolve-complaint1{
+    position: absolute;
+    left: 62%;
+    top: 4.5em;
+    width: 37%;
+    padding: 1%;
+    box-shadow: 0 2px 2px 2px #ddd;
+}
+.resolve-complaint1 .text-heading1{
+    margin-left: 20px;
+}
+.resolve-complaint1 .view-resolve1{
+    margin-left: 50%;
+    background-color: rgb(255, 135, 0);
+    box-shadow: 0 2px 2px 2px #ddd;
+    padding: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #fff;
+}
+.resolve-complaint1 .view-resolve1 a{
+  
+    border-radius: 10px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.pagination {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+.custom-search-input {
+    margin-bottom: 20px;
+    margin-left: 100px;
+   
+}
+.pagination {
+    display: flex;
+    margin-left: 10em;
+    margin-top: 16em;
+}
+.pagination button {
+    padding: 0.5em 1em;
+    margin: 0 0.5em;
+    background: rgb(255, 135, 0);
+    border: 1px solid #ddd;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.pagination button:hover {
+    background: rgb(255, 165, 0);
+}
+.pagination button.active {
+    background: rgb(255, 165, 0);
+    color: white;
+}

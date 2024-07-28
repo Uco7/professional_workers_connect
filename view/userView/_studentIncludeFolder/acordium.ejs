@@ -1,0 +1,27 @@
+
+<div class="accordion accordion-flush" id="accordionFlushExample"  >
+   
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                New notification<br>
+                <%= notify.sentAt %>
+            </button>
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <%= notify.message %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS Bundle (includes Popper) -->
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var myAccordion = new bootstrap.Accordion(document.getElementById('accordionFlushExample'));
+    });
+</script>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile Page</title>
+    <link rel="stylesheet" href="/css/adminProfile.css">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container wrapp" id="complaintSection">
+        <h2 id="bio">Student Complaint Form</h2>
+        <form class="row g-3" action="" method="post" enctype="multipart/form-data">
+            <div class="container text-center">
+                <% if (complaint && complaint.registeredCourse) { %>
+                    <img src="data:image/jpeg;base64,<%= complaint.registeredCourse %>" alt="Registered Course Image" style="width: 200px; height: 200px; border-radius: 10px;">
+                    <input type="hidden" name="existingResult" value="<%= complaint.result %>">
+                    <img src="data:image/jpeg;base64,<%= complaint.registeredCourse %>" alt="Registered Course Image" style="width: 200px; height: 200px; border-radius: 10px;">
+                    <input type="hidden" name="existingRegisteredCourse" value="<%= complaint.registeredCourse %>">
+                <% } else { %>
+                    <p>No registered course image available.</p>
+                <% } %>
+            </div>
+
+            <div class="col-md-6">
+                <label for="fname" class="form-label">First Name</label>
+                <input type="text" class="form-control" name="fname" value="<%= complaint?.student?.fname || '' %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="lname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="lname" value="<%= complaint?.student?.lname || '' %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="middle_name" class="form-label">Middle Name</label>
+                <input type="text" class="form-control" name="middle_name" value="<%= complaint?.student?.middle_name || '' %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="department" class="form-label">Department</label>
+                <input type="text" class="form-control" name="department" value="<%= complaint?.student?.department || '' %>">
+            </div>
+
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" value="<%= complaint?.student?.email || '' %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="phone_no" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" name="phone_no" value="<%= complaint?.student?.phone_no || '' %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="course_title" class="form-label">Course Title</label>
+                <input type="text" class="form-control" name="course_title" placeholder="Enter course title" value="<%= complaint?.course_title || '' %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="course_code" class="form-label">Course Code</label>
+                <input type="text" class="form-control" name="course_code" placeholder="Enter course code" value="<%= complaint?.course_code || '' %>" required>
+            </div>
+            <div class="col-md-6">
+                <label for="complaint_date" class="form-label">Complaint Date</label>
+                <input type="text" class="form-control" name="complaint_date" value="<%= complaint ? new Date(complaint.complaint_date).toLocaleDateString() : '' %>" required>
+            </div>
+            <div class="col-md-6">
+                <label for="section" class="form-label">Section</label>
+                <select name="section" id="section" class="form-control" required>
+                    <option value="">Section</option>
+                    <option value="2020/2021" <% if (complaint?.section === '2020/2021') { %>selected<% } %>>2020/2021</option>
+                    <option value="2021/2022" <% if (complaint?.section === '2021/2022') { %>selected<% } %>>2021/2022</option>
+                    <option value="2022/2023" <% if (complaint?.section === '2022/2023') { %>selected<% } %>>2022/2023</option>
+                    <option value="2023/2024" <% if (complaint?.section === '2023/2024') { %>selected<% } %>>2023/2024</option>
+                    <option value="2024/2025" <% if (complaint?.section === '2024/2025') { %>selected<% } %>>2024/2025</option>
+                    <option value="2025/2026" <% if (complaint?.section === '2025/2026') { %>selected<% } %>>2025/2026</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="level" class="form-label">Level</label>
+                <select name="level" id="level" class="form-control" required>
+                    <option value="">Level</option>
+                    <option value="100" <% if (complaint?.level == 100) { %>selected<% } %>>100</option>
+                    <option value="200" <% if (complaint?.level == 200) { %>selected<% } %>>200</option>
+                    <option value="300" <% if (complaint?.level == 300) { %>selected<% } %>>300</option>
+                    <option value="400" <% if (complaint?.level == 400) { %>selected<% } %>>400</option>
+                    <option value="500" <% if (complaint?.level == 500) { %>selected<% } %>>500</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="semester" class="form-label">Semester</label>
+                <select name="semester" id="semester" class="form-control" required>
+                    <option value="">Semester</option>
+                    <option value="first" <% if (complaint?.semester === 'first') { %>selected<% } %>>First Semester</option>
+                    <option value="second" <% if (complaint?.semester === 'second') { %>selected<% } %>>Second Semester</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="matric" class="form-label">Matric Number</label>
+                <input type="text" class="form-control" name="matric" placeholder="Provide the matric number" value="<%= complaint?.student?.matric || '' %>" required>
+            </div>
+
+            <div class="col-md-12">
+                <label for="comment" class="form-label">Complaint Description</label>
+                <textarea name="comment" id="comment" class="form-control" rows="5" required><%= complaint?.comment || '' %></textarea>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">Save</button>
+                <a href="/staff/proceed/resolve/complaint?id=<%= complaint?._id %>" class="btn btn-success">Proceed To Resolve Complaint</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

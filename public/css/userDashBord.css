@@ -1,0 +1,133 @@
+body{
+    background-color: mintcream !important;
+}
+
+.navbar{
+    background-color: mintcream !important;
+    color: aliceblue;
+    
+    box-shadow: 2px 8px 2px rgb(236, 236, 240);
+}
+.notification{
+    position: relative;
+    left:20rem
+}
+.notification #red{
+    position: absolute;
+   left: 0.5rem;
+   bottom:1rem ;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    align-items: center;
+    font-weight: 600;
+     font-size: 10px;
+     color: #fff;
+    background-color: red;
+   
+
+
+}
+
+.accordion{
+    width: 500px;
+    position:relative;
+    left: 40rem;
+    display: blo;
+  
+
+}
+.navbar .log-out{
+    color: red;
+    padding: 5px;
+    font-size: x-large;
+    font-weight: 600;
+    text-shadow:  0 2px 1px rgb(236, 236, 240);
+}
+#user{
+    
+    margin-top: 20px;
+    margin-left: 25px;
+}
+ .sidebar{
+    background-color: #70837d;
+    color: aliceblue;
+    height: 150vh;
+    box-shadow: 2px 4px 2px rgb(236, 236, 240) ;
+    
+    
+    }
+    
+    .sidebar .cont{
+    
+    margin-top: 50px;
+    padding: auto;
+   
+    font-size: larger;
+
+
+}
+.sidebar .cont li{
+    padding: 5px;
+    /* box-shadow:  0 1px 1px; */
+     
+    margin: 20px;
+    text-align: center;
+    
+    
+    }
+    .sidebar .cont li a{
+    color: rgb(255, 247, 247);
+
+}
+.sidebar .cont li :hover{
+    background-color: mintcream;
+    width: 100%;
+    color: black;
+  
+}
+.wrapp-box{
+   margin-top: 40px;
+    display: flex ;
+    flex-direction: row;
+}
+.wrapp-box .box-cont{
+    display: flex ;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: x-large;
+    color: #fff;
+
+}
+.wrapp-box .box1{
+    width: 500px;
+   border-radius: 20px;
+    padding: 20px;
+    background-color: #70837d;
+}
+.wrapp-box .box2{
+    width: 500px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #70837d;
+    
+
+}
+.check-result{
+  position: absolute;
+  left: 30%;
+  
+
+
+}
+.check-result form{
+    padding: 10px;
+    margin: 20px;
+}
+#btn-result{
+    margin-top: 20px;
+}
+.layComplaint {
+    /* border: 1px  solid salmon; */
+}

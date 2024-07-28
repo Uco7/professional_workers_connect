@@ -1,0 +1,37 @@
+body{
+    background-color: #ddd !important;
+}
+.card-body form{
+    margin: 10px;
+    padding: 10px;
+    
+}
+.row .form{
+    background-color: #848887;
+    color: aliceblue;
+
+}
+.card-body form .form-group{
+
+    padding: 5px;
+    
+}
+.card-body .btn-cont{
+   
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    
+}
+.card-body .btn{
+   
+    padding: 10px;
+    margin-top: 2em;
+    width: 50%;
+}
+.card-body label{
+   
+    padding: 10px;
+    font-size: larger;
+    font-weight: 600;
+}

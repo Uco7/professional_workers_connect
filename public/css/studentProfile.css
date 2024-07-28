@@ -1,0 +1,64 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.navbar{
+    background-color:#fff;
+    
+    box-shadow: 2px 4px 2px ;
+}
+.navbar .log-out{
+    color: red;
+    padding: 5px;
+    font-size: x-large;
+    font-weight: 600;
+    text-shadow:  0 2px 1px rgb(236, 236, 240);
+}
+.notification{
+    position: relative;
+}
+.notification #red{
+    position: absolute;
+    left: 8px;
+    bottom: 1rem;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    align-items: center;
+    font-weight: 600;
+     font-size: 10px;
+     color: #fff;
+    background-color: red;
+   
+
+
+}
+.accordion{
+    width: 500px;
+    position: absolute;
+    left: 20%;
+    display: none;
+
+}
+body{
+    background-color: mintcream !important;
+}
+.wrapp {
+    position: absolute;
+    top: 30%;
+    right: 10%;
+
+}
+ #bio{
+position: absolute;
+top: -10%;
+left: -2%;
+text-decoration: underline;
+text-transform: capitalize;
+
+font-size: xx-large;
+text-shadow:  2px 4px #fff;
+}

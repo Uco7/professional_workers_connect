@@ -1,0 +1,81 @@
+body{
+    background-color: mintcream !important;
+}
+.notification{
+    position: relative;
+}
+.notification #red{
+    position: absolute;
+    left: 8px;
+    bottom: 1rem;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    align-items: center;
+    font-weight: 600;
+     font-size: 10px;
+     color: #fff;
+    background-color: red;
+   
+
+
+}
+.accordion{
+    width: 500px;
+    position: absolute;
+    left: 20%;
+    display: none;
+
+}
+.navbar{
+    background-color:#fff;
+    
+    box-shadow: 2px 4px 2px ;
+    }
+    
+    .sidebar{
+        background-color:rgb(236, 236, 240);
+    height: 100vh;
+    box-shadow: 2px 4px 2px ;
+    
+    
+    }
+    
+    .sidebar .cont{
+        
+        margin-top: 50px;
+        padding: auto;
+       
+        font-size: larger;
+        
+        
+        }
+        .sidebar .cont li{
+            padding: 5px;
+            box-shadow:  0 1px 1px;
+         
+            margin: 20px;
+            text-align: center;
+    
+    
+    }
+    .sidebar .cont li a{
+        color: black;
+        
+        }
+        .sidebar .cont li :hover{
+            background-color: #ddd;
+        
+            
+            }
+            .sidebar-top{
+                margin-top: 10%;
+            }
+         .main-content  table th{
+                background-color: rgb(255, 136, 0) !important;
+                color: #fff;
+            }
+            .main-content  table {
+                width: 80%;
+            }

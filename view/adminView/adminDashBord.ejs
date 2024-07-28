@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin Dashboard</title>
+    <link rel="stylesheet" href="/css/adminDashBord.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+   <!-- including admin navbar -->
+   <%- include('_includeFolder/adminNav') %>
+   <!-- including admin navbar -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <%= admin.role %>
+                <!-- including admin sidebar -->
+                <%- include('_includeFolder/_adminSideBar') %>
+                <!-- including admin sidebar -->
+            </div>
+            
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+                <div class="wrapp-box bx">
+                    <div class="container box-cont">
+                        <div class="box1">
+                            <div class="icon"><i class="fa-solid fa-right-to-bracket"></i></div>
+                            <div class="fig">1  <span><a href="/admin/view/registered/staff"><i class="fa-solid fa-eye"></i></a></span></div>
+                            <div class="text">Registered Staffs</div>
+                        </div>
+                        
+                        <div class="box1">
+                            <div class="icon1"><i class="fa-solid fa-right-to-bracket"></i></div>
+                            <div class="fig"><%= registeredStudents.length %>  <span><a href="/admin/view/registered/student"><i class="fa-solid fa-eye"></i></a></span></div><br>
+                            <div class="text" style="margin-top: -10%;">Registered Students</div>
+                        </div>
+                        <div class="box1">
+                            <div class="icon2"><i class="fa-solid fa-right-to-bracket"></i></div>
+                            <div class="fig">   <%= complaint.length %>   <span><a href="/admin/view/all/resolve/complaint"><i class="fa-solid fa-eye"></i></a></span></div><br>
+                            <div class="text" style="margin-top: -10%;">Resolve Complaint</div>
+                        </div>
+                        <div class="box1">
+                            <div class="icon3"><i class="fa-solid fa-right-to-bracket"></i></div>
+                            <div class="fig">1 <span><a href="/admin/view/registered/staff"><i class="fa-solid fa-eye"></i></a></span></div>
+                            <div class="text">Pending Complaint</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapp-table">
+                    <div class="table-container">
+                        <div class="resolve-complaint">
+                            <div class="text-heading">All Complaints</div>
+                            <input type="text" id="customSearchBox" class="form-control custom-search-input" placeholder="Search...">
+                            <div class="view-resolve"> <a href="/admin/view/all/complaints">View All</a> </div>
+                        </div>
+                        <table id="studentTable" class="table table-bordered table1">
+                            <thead>
+                                <tr>
+                                    <th>S/N</th>
+                                    <th>NAME</th>
+                                    <th>MATRIC</th>
+                                    <th>DEPARTMENT</th>
+                                    <th>COMPLAINT DATE</th>
+                                    <th>VIEW</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentTableBody">
+                                <% for (let i = 0; i < allComplaints.length; i++) { %>
+                                    <tr>
+                                        <td><%= i + 1 %></td>
+                                        <td><%= allComplaints[i].student.fname %> <%= allComplaints[i].student.lname %></td>
+                                        <td><%= allComplaints[i].student.matric %></td>
+                                        <td><%= allComplaints[i].student.department %></td>
+                                        <td><%= new Date(allComplaints[i].complaint_date).toLocaleDateString() %></td>
+                                       
+                                        <td id="view-td"><a href="/admin/view/complaints/form?id=<%= allComplaints[i]._id %>">View</a>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                        <div class="pagination" id="paginationControls"></div>
+                    </div>
+                    <div class="resolve-complaint1">
+                        <div class="text-heading1">New Complaints</div>
+                        <div class="view-resolve1"><a href="/admin/view/all/new/complat"> View All</a></div>
+                    </div>
+                    <div class="table-container">
+                        <table id="newComplaintTable" class="table table-bordered table2">
+                            <thead>
+                                <tr>
+                                    <th>NAME</th>
+                                    <th>MATRIC</th>
+                                    <th>DATE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% 
+                                // Get the current year
+                                var currentYear = new Date().getFullYear();
+                                
+                                // Filter complaints for the current year
+                                var complaintsCurrentYear = allComplaints.filter(complaint => new Date(complaint.complaint_date).getFullYear() === currentYear);
+                                
+                                // Iterate through filtered complaints
+                                complaintsCurrentYear.forEach(complaint => { 
+                                %>
+                                <tr>
+                                    <td><%= complaint.student.fname %> <%= complaint.student.lname %></td>
+                                    <td><%= complaint.student.matric %></td>
+                                    <td><%= new Date(complaint.complaint_date).toLocaleDateString() %></td>
+                                
+                                    <td id="view-td"><a href="/admin/view/complaints/form?id=<%= complaint._id %>">View</a>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const rowsPerPage = 5;
+            let currentPage = 1;
+            const table = document.getElementById('studentTable');
+            const tableBody = document.getElementById('studentTableBody');
+            const paginationControls = document.getElementById('paginationControls');
+            const rows = Array.from(tableBody.querySelectorAll('tr'));
+            const totalRows = rows.length;
+            const totalPages = Math.ceil(totalRows / rowsPerPage);
+
+            function displayRows() {
+                tableBody.innerHTML = '';
+                const startIndex = (currentPage - 1) * rowsPerPage;
+                const endIndex = Math.min(startIndex + rowsPerPage, totalRows);
+                for (let i = startIndex; i < endIndex; i++) {
+                    tableBody.appendChild(rows[i]);
+                }
+            }
+
+            function updatePagination() {
+                paginationControls.innerHTML = '';
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement('button');
+                    button.innerText = i;
+                    button.classList.add('paginate-button');
+                    if (i === currentPage) {
+                        button.classList.add('active');
+                    }
+                    button.addEventListener('click', function() {
+                        currentPage = i;
+                        displayRows();
+                        updatePagination();
+                    });
+                    paginationControls.appendChild(button);
+                }
+            }
+
+            // Custom search functionality
+            const customSearchBox = document.getElementById('customSearchBox');
+            customSearchBox.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+                const filteredRows = rows.filter(row => {
+                    return row.innerText.toLowerCase().includes(searchTerm);
+                });
+                totalRows = filteredRows.length;
+                totalPages = Math.ceil(totalRows / rowsPerPage);
+                currentPage = 1;
+                displayRows(filteredRows);
+                updatePagination(filteredRows);
+            });
+
+            // Initialize table
+            displayRows();
+            updatePagination();
+        });
+    </script>
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard</title>
+    <link rel="stylesheet" href="/css/staffDashBord.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <img src="logo" alt="logo">
+            <div class="notification">    
+                <a class="nav-link" href="#"><i class="fa-regular fa-bell"></i>
+                <div id="red">1</div></a>
+            </div>
+            <ul class="nav justify-content-end">
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: rgb(255, 135, 0); margin-left: -80%;"><i class="fa-regular fa-bell"></i></a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link log-out" href="#" style="color: red; font-size: larger; font-weight: 600;">Log out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="accordion accordion-flush" id="accordionFlushExample"  >
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Accordion Item #1
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Accordion Item #2
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Accordion Item #3
+                </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var myAccordion = new bootstrap.Accordion(document.getElementById('accordionFlushExample'));
+        });
+    </script>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <!-- including admin sidebar -->
+                       <%- include('_staffIncludeFolder/staffSideBar') %>
+                <!-- including admin sidebar -->
+            </div>
+            
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+                <div class="wrapp-box bx">
+                    <div class="container box-cont">
+                        <div class="box1 bg-secondary">
+                            <h2>Are You New Here?</h2>
+                            <p>If you are a new student/user, kindly go through the following steps:</p>
+                            <ul>
+                                <li>You can update your profile</li>
+                                <li>Check results</li>
+                                <li>Lay complaint about your result without stress</li>
+                            </ul>
+                        </div>
+                        <div class="box2 bg-success">
+                            <h2>If You Need Any Help or Are Confused About Anything</h2>
+                            <p>Kindly contact us through this email: ucheuc070@gmail.com </p>
+                        </div>
+                    </div> 
+                </div>
+                <div class="table-responsive"  style="margin-top: 10%;">
+                    <table id="complaintTable" class="table table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>Student Name</th>
+                                <th>Matric Number</th>
+                                <th>Department</th>
+                                <th>Course Title</th>
+                                <th>Course Code</th>
+                                <th>Complaint Date</th>
+                                <th>Level</th>
+                                <th>Section</th>
+                                <th>Semester</th>
+                                <th>RESOLVE COMPLAINT</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% complaints.forEach((complaint,index) => { %>
+                                <tr>
+                                    <td><%= index+1 %></td>
+                                    <td><%= complaint.student.fname %> <%= complaint.student.lname %></td>
+                                    <td><%= complaint.student.matric %></td>
+                                    <td><%= complaint.student.department %></td>
+                                    <td><%= complaint.course_title %></td>
+                                    <td><%= complaint.course_code %></td>
+                                    <td><%= new Date(complaint.complaint_date).toLocaleDateString() %></td>
+                                    <td><%= complaint.level %></td>
+                                    <td><%= complaint.section %></td>
+                                    <td><%= complaint.semester %></td>
+                                    <td><a href="/staff/view/complaint?id=<%= complaint._id %>">View</a></td>
+                                   
+                                 
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Your script imports and custom scripts go here -->
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $('#complaintTable').DataTable({
+                paging: true, // Enable pagination
+                pageLength: 10, // Number of rows to display per page
+                lengthChange: false, // Disable the option to change the number of rows displayed
+                searching: true, // Enable search functionality
+                info: false // Disable info text "Showing X to Y of Z entries"
+            });
+
+            // Apply custom search
+            $('#customSearchBox').on('keyup', function() {
+                $('#complaintTable').DataTable().search($(this).val()).draw();
+            });
+        });
+    </script>
+</body>
+</html>

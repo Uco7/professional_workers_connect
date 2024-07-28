@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Complaint Feedback</title>
+    <link rel="stylesheet" href="/css/adminProfile.css">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container wrapp" id="complaintSection">
+        <h2 id="bio">Complaint Details</h2>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="fname" class="form-label">Full page snapshot of Exam Attendance sheet</label>
+                <img src="data:image/jpeg;base64,<%= complaint.examAttendance %>" class="img-fluid" alt="Exam Attendance">
+            </div>
+
+            <div class="col-md-6">
+                <label for="lname" class="form-label">Full page snapshot of exam score</label>
+                <img src="data:image/jpeg;base64,<%= complaint.examScore %>" class="img-fluid" alt="Exam Score">
+            </div>
+
+            <div class="col-md-6">
+                <label for="middle_name" class="form-label">Student Full Name</label>
+                <input type="text" class="form-control" name="name" value="<%= complaint.stu_name %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="department" class="form-label">Department</label>
+                <input type="text" class="form-control" name="department" value="<%= complaint.department %>" >
+            </div>
+
+            <div class="col-md-6">
+                <label for="email" class="form-label">Student Matric Number</label>
+                <input type="text" class="form-control" name="matric" value="<%= complaint.matric %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="email" class="form-label">Course Code</label>
+                <input type="text" class="form-control" name="course_code" value="<%= complaint.course_code %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="email" class="form-label">Course Title</label>
+                <input type="text" class="form-control" name="course_title" value="<%= complaint.course_title %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="course_title" class="form-label">Section </label>
+                <input type="text" class="form-control" name="section" value="<%= complaint.section %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="course_title" class="form-label">Level </label>
+                <input type="text" class="form-control" name="level" value="<%= complaint.level %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="course_title" class="form-label">Semester </label>
+                <input type="text" class="form-control" name="semester" value="<%= complaint.semester %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="email" class="form-label">Form Submit Date/Response Date</label>
+                <input type="text" class="form-control" name="submitDate" value="<%= new Date(complaint.submitDate).toLocaleDateString() %>" required>
+            </div>
+
+            <div class="col-md-12">
+                <label for="comment" class="form-label">Review to Admin</label>
+                <textarea name="comment" id="comment" class="form-control" rows="5" required><%= complaint.comment %></textarea>
+            </div>
+
+            <!-- You can add more fields as per your requirement -->
+
+            <div class="col-12">
+              
+                <!-- /admin/update/result" -->
+                <!-- <a href="/admin/update/result?id=<%= complaint.uploadedRsult._id %>" class="btn btn-primary">update Result</a> -->
+                 <a href="/staff/view/resolved/complaints" class="btn btn-primary"  >Back</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

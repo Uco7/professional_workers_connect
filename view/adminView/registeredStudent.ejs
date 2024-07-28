@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All registered Students Page</title>
+    <link rel="stylesheet" href="/css/actors.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    
+</head>
+<body>
+     <!-- including admin navbar -->
+     <%- include('_includeFolder/adminNav') %>
+     <!-- including admin navbar -->
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <!-- including admin sidebar -->
+                <%- include('_includeFolder/_adminSideBar') %>
+                <!-- including admin sidebar -->
+            </div>
+            
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+                <div class="wrapp-box bx">
+                    <div class="container box-cont">
+                      
+                        <div class="resolve-complaint">
+                            <div class="text-heading">All Registered Students</div>
+                            <input type="text" id="customSearchBox" class="form-control custom-search-input" placeholder="Search...">
+                        </div>
+                        <div class="table-responsive">
+                            <table id="studentTable" class="table table-bordered table1">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>NAME</th>
+                                        <th>MATRIC NUMBER</th>
+                                        <th>EMAIL</th>
+                                        <th>PHONE NUMBER</th>
+                                        <th>DATE OF BIRTH</th>
+                                        <th>DEPARTMENT</th>
+                                        <th>GENDER</th>
+                                        <th>UPDATE</th>
+                                        <th>DELETE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(let i=0; i<registeredStudents.length;i++){ %>
+                                        <tr>
+                                            <td><%= i+1 %></td>
+                                            <td><%= registeredStudents[i].fname %> <%= registeredStudents[i].middle_name %> <%= registeredStudents[i].lname %></td>
+                                            <td><%= registeredStudents[i].matric %></td>
+                                            <td><%= registeredStudents[i].email %></td>
+                                          <td><%= registeredStudents[i].phone_no %></td>
+                                            <td><%=new Date(registeredStudents[i].date_of_birth).toLocaleDateString()  %></td>
+                                            <td><%= registeredStudents[i].department %></td>
+                                            <td><%= registeredStudents[i].gender %></td>
+                                            <td id="view-td"><i class="fa-solid fa-pen-to-square"></i></td>
+                                            <td id="view-td"><i class="fa-solid fa-trash"></i></td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var table = new DataTable('#studentTable', {
+                paging: true,
+                pageLength: 2, // Number of rows to display per page
+                lengthChange: false, // Disable the option to change the number of rows displayed
+                info: false, // Disable the info text "Showing X to Y of Z entries"
+                autoWidth: false, // Disable auto width
+                searching: true // Enable search functionality
+            });
+
+            // Custom search box logic
+            var customSearchBox = document.getElementById('customSearchBox');
+            customSearchBox.addEventListener('keyup', function() {
+                table.search(this.value).draw();
+            });
+            });
+            </script>
+            </body>
+            </html>

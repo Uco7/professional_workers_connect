@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Complaints Page</title>
+    <link rel="stylesheet" href="/css/actors.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+</head>
+<body>
+    <!-- including admin navbar -->
+    <%- include('_includeFolder/adminNav') %>
+    <!-- including admin navbar -->
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <!-- include admin sidebar -->
+                <%- include('_includeFolder/_adminSideBar') %>
+                <!-- include admin sidebar -->
+            </div>
+            
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+                <div class="wrapp-box bx">
+                    <div class="container box-cont">
+                        <div class="resolve-complaint">
+                            <div class="text-heading"> New Complaints </div>
+                            <input type="text" id="customSearchBox" class="form-control custom-search-input" placeholder="Search...">
+                        </div>
+                        <div class="table-responsive">
+                            <table id="studentTable" class="table table-bordered table1">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>NAME</th>
+                                        <th>MATRIC</th>
+                                        <th>DEPARTMENT</th>
+                                        <th>COURSE TITLE</th>
+                                        <th>COURSE CODE</th>
+                                        <th>GENDER</th>
+                                        <th>PHONE NUMBER</th>
+                                        <th>EMAIL</th>
+                                        <th>LEVEL</th>
+                                        <th>SECTION</th>
+                                        <th>SEMESTER</th>
+                                        <th>COMPLAINT DATE</th>
+                                        <th>VIEW</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentTableBody">
+                                    <% 
+                                    // Get the current year
+                                    var currentYear = new Date().getFullYear();
+                                    
+                                    // Filter complaints for the current year
+                                    var complaintsCurrentYear = allComplaints.filter(complaint => new Date(complaint.complaint_date).getFullYear() === currentYear);
+                                    
+                                    // Iterate through filtered complaints
+                                    complaintsCurrentYear.forEach((complaint, index) => { 
+                                    %>
+                                    <tr>
+                                        <td><%= index + 1 %></td>
+                                        <td><%= complaint.student.fname %> <%= complaint.student.lname %></td>
+                                        <td><%= complaint.student.matric %></td>
+                                        <td><%= complaint.student.department %></td>
+                                        <td><%= complaint.course_title %></td>
+                                        <td><%= complaint.course_code %></td>
+                                        <td><%= complaint.student.gender %></td>
+                                        <td><%= complaint.student.phone_no %></td>
+                                        <td><%= complaint.student.email %></td>
+                                        <td><%= complaint.level %></td>
+                                        <td><%= complaint.section %></td>
+                                        <td><%= complaint.semester %></td>
+                                        <td><%= new Date(complaint.complaint_date).toLocaleDateString() %></td>
+                                        <td><a href="/admin/view/complaints/form?id=<%= complaint._id %>">View</a></td>
+                                    </tr>
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var table = new DataTable('#studentTable', {
+                paging: true,
+                pageLength: 10, // Number of rows to display per page
+                lengthChange: false, // Disable the option to change the number of rows displayed
+                info: false, // Disable the info text "Showing X to Y of Z entries"
+                autoWidth: false, // Disable auto width
+                searching: true // Enable search functionality
+            });
+
+            // Custom search box logic
+            var customSearchBox = document.getElementById('customSearchBox');
+            customSearchBox.addEventListener('keyup', function() {
+                table.search(this.value).draw();
+            });
+        });
+    </script>
+</body>
+</html>
