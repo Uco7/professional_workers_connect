@@ -43,8 +43,10 @@ body{
   }
   .error-message {
     color: red;
-    font-size: small;
+    font-size:large;
+    font-weight: 400;
 }
 .hidden {
     display: none;
 }
+

@@ -1,61 +1,86 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("#registrationForm");
+    const matric = document.querySelector("#matric");
+    const middle_name = document.querySelector("#middle_name");
+    const  image = document.querySelector("#profile_image");
+    const department = document.querySelector("#department");
+    const matricLabel = document.querySelector('label[for="matric"]');
+    const imageLabel = document.querySelector('label[for="profile_image"]');
+    const middle_nameLabel = document.querySelector('label[for="middle_name"]');
+    const departmentLabel = document.querySelector('label[for="department"]');
+
     const roleSelect = document.querySelector("#role");
     const phoneDiv= document.getElementById("phoneDiv");
+    const commonFieldInput={
+        department,
+        middle_name,
+        matric,
+        matricLabel,
+        middle_nameLabel,
+        departmentLabel ,
+        image,
+        imageLabel
+    }
 
     function handleRoleChange() {
-        const fieldsToToggle = [
-            "matric",
-            "middle_name",
-            "department",
-            "profile_image"
-        ];
+        if(roleSelect.value==='admin'){
+            commonFieldInput.department.style.display='none';
+            commonFieldInput.departmentLabel.style.display='none';
+            commonFieldInput.matric.style.display='none';
+            commonFieldInput.matricLabel.style.display='none';
+            commonFieldInput.middle_name.style.display='none';
+            commonFieldInput.middle_nameLabel.style.display='none';
+            commonFieldInput.image.style.display='none';
+            commonFieldInput.imageLabel.style.display='none';
+            commonFieldInput.department.removeAttribute("required")
+            commonFieldInput.matric.removeAttribute("required")
+            commonFieldInput.department.removeAttribute("required")
+            commonFieldInput.image.removeAttribute("required")
+            phoneDiv.style.marginTop='-5rem'
+         
+            }else if(roleSelect.value==='staff'){
+                commonFieldInput.department.style.display='none';
+                commonFieldInput.departmentLabel.style.display='none';
+                commonFieldInput.matric.style.display='none';
+                commonFieldInput.matricLabel.style.display='none';
+                commonFieldInput.middle_name.style.display='block';
+                commonFieldInput.middle_nameLabel.style.display='block';
+                commonFieldInput.image.style.display='block';
+                commonFieldInput.imageLabel.style.display='block';
+                commonFieldInput.department.removeAttribute("required")
+                commonFieldInput.matric.removeAttribute("required")
+                commonFieldInput.department.removeAttribute("required")
+                commonFieldInput.image.setAttribute("required","required")
+                 phoneDiv.style.marginTop='-5rem'
 
-        fieldsToToggle.forEach(field => {
-            const fieldElement = document.querySelector(`#${field}`);
-            const labelElement = document.querySelector(`label[for='${field}']`);
-
-            if (roleSelect.value === "admin") {
-                matric.style.display='none';
-                fieldElement.style.display='none';
-                labelElement.style.display='none';
-                fieldElement.removeAttribute("required");
-                phoneDiv.style.marginTop='-5rem'
-            } else if (roleSelect.value === "staff") {
-                if (field === "profile_image") {
-                    fieldElement.style.display='block';
-                    labelElement.style.display='block';
-                    fieldElement.setAttribute("required", "required");
-                } else if(field==='matric')   {
-                    
-                    fieldElement.style.display='none';
-                    labelElement.style.display='none';
-                    fieldElement.removeAttribute("required");
-                }
-                else{
-                    fieldElement.style.display='block';
-                    labelElement.style.display='block';
-
-                }
-            } else {
-                fieldElement.style.display='block';
-                labelElement.style.display='block';
-                   phoneDiv.style.marginTop='0'
-                fieldElement.setAttribute("required", "required");
             }
-        });
+            else{
+                Object.values(commonFieldInput).forEach(element=>{
+                    if(element){
+                        element.style.display="block"
+                        phoneDiv.style.marginTop='auto'
+                        
+                    }
+                })
+            }
+            
+            // phoneDiv.style.marginTop = '-5rem';
+            
+            
+        
+       
     }
 
     roleSelect.addEventListener("change", handleRoleChange);
     handleRoleChange();
 
     const regexPatterns = {
-        fnameRegex: /^[A-Za-z\s.'-]+$/,
-        lnameRegex: /^[A-Za-z\s.'-]+$/,
-        m_nameRegex: /^[A-Za-z\s.'-]*$/,
+        fnameRegex:  /^[A-Za-z\s]{2,}$/,
+        lnameRegex:  /^[A-Za-z\s]{2,}$/,
+        m_nameRegex:  /^[A-Za-z\s]{2,}$/,
         depregex: /^[A-Za-z\s.\/'-]+$/,  // Adjusted regex
         emailRegex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        passwordRegex: /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\d])(?=.*[\W_]).{8,}$/,
+         passwordRegex : /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d@$!%*?&<>^.,:;[\]{}()|~`#\-_/\\+=]{4,}$/,
         phone_numberRegex: /^\+?\d{1,4}[-\s]?\d{1,15}$/,
         stateRegex: /^[A-Za-z\s.'-]+$/,
         lgaRegex: /[A-Za-z\s\-'’]+/,
@@ -71,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (validateFormInput()) {
             submitForm();
         }
+        // form.reset()
     });
 
     function validateFormInput() {
@@ -121,10 +147,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 isValid = false;
             }
         }
-        if (middleField && !regexPatterns.m_nameRegex.test(middleField.value)) {
-            showError(middleField, "Invalid middle name format");
-            isValid = false;
-        }
+          if(middleField && middleField.value.trim()!==""){
+
+              if (!regexPatterns.m_nameRegex.test(middleField.value)) {
+              showError(middleField,`Invalid middle name format:
+                    name field must contain at least two letters 
+                    name field must not contain special characters.`);
+              isValid = false;
+          }
+          }
+       
         isValid = validateProfileImage() && isValid;
         return isValid;
     }
@@ -142,11 +174,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const phoneNumber = document.querySelector("#phone_no");
 
         if (fnameField && !regexPatterns.fnameRegex.test(fnameField.value)) {
-            showError(fnameField, "Invalid first name format");
+            showError(fnameField, `Invalid first name format:
+                  name field must contain at least two letters 
+                   name field must not contain special characters.`);
             isValid = false;
         }
         if (lnameField && !regexPatterns.lnameRegex.test(lnameField.value)) {
-            showError(lnameField, "Invalid last name format");
+            showError(lnameField, `Invalid last name format:
+                  name field must contain at least two letters 
+                  name field must  not contain special characters.`);
             isValid = false;
         }
         if (email && !regexPatterns.emailRegex.test(email.value)) {
@@ -154,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
             isValid = false;
         }
         if (psw && !regexPatterns.passwordRegex.test(psw.value)) {
-            showError(psw, ` paasword must contain a lower caase latter
+            showError(psw, ` paasword must contain a lower case latter
             upper case latter
             special character
              a number`);

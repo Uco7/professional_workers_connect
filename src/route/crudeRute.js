@@ -6,8 +6,10 @@ crudeRoute.get("/api/admin/view/uploaded/result",crudeAuth.adminViewUploadedResu
 
 crudeRoute.get("/api/admin/find/all/resolve/complaints",crudeAuth.adminFindResolveComplaint)
 crudeRoute.get("/api/staff/view/complaint",crudeAuth.findStoredComplaint)
+crudeRoute.get("/api/staff/all/complaints",crudeAuth.staffAllComplaint)
 crudeRoute.get("/api/all/complaints",crudeAuth.allComplaint)
 crudeRoute.get("/api/staff/find/course/id",crudeAuth.findCourse)
+crudeRoute.get("/api/staff/view/user/result",crudeAuth. staffViewUploadedResult)
 crudeRoute.get("/api/staff/find/course/id",crudeAuth.notifyUser)
 crudeRoute.get("/api/staff/find/all/resolved/complaints",crudeAuth.findResolvedComplaint)
 crudeRoute.get("/api/user/notification",crudeAuth.findResolvedComplaint)

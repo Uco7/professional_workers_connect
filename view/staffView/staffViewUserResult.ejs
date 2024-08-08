@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Uploaded Result Page</title>
-    <link rel="stylesheet" href="/css/actors.css">
+    <title>All Uploaded Results</title>
+    <!-- <link rel="stylesheet" href="/css/actors.css"> -->
+    <link rel="stylesheet" href="/css/staffDashBord.css">
+
     <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 </head>
 <body>
-  <!-- including admin navbar -->
-  <%- include('_includeFolder/adminNav') %>
-  <!-- including admin navbar -->
-    
+<!-- staff nav bar -->
+<%- include('_staffIncludeFolder/staffNavBar') %>
+<!-- staff nav bar -->
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-3 col-lg-2 sidebar">
                 <!-- including admin sidebar -->
-                <%- include('_includeFolder/_adminSideBar') %>
+                <%- include('_staffIncludeFolder/staffSideBar') %>
                 <!-- including admin sidebar -->
             </div>
             
@@ -27,53 +29,41 @@
                 <div class="wrapp-box bx">
                     <div class="container box-cont">
                         <div class="resolve-complaint">
-                            <div class="text-heading">All  Uplaoded Results</div>
+                            <div class="text-heading">All Uploaded Results</div>
                             <input type="text" id="customSearchBox" class="form-control custom-search-input" placeholder="Search...">
                         </div>
+                         <!-- including admin sidebar -->
+                         <%- include('_staffIncludeFolder/staffAcordium') %>
+                         <!-- including admin sidebar -->
                         <div class="table-responsive">
                             <table id="resultTable" class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Student Name</th>
-                                        <th>Matric Number</th>
-                                        <th>Department</th>
-                                        <th>Section</th>
-                                        <th>Level</th>
-                                        <th>Semester</th>
                                         <th>COURSE TITLE</th>
                                         <th>COURSE CODE</th>
                                         <th>COURSE UNIT</th>
-                                        <th>ASSESMENT1</th>
-                                        <th>ASSESMENT2</th>
+                                        <th>ASSESSMENT1</th>
+                                        <th>ASSESSMENT2</th>
                                         <th>EXAM SCORE</th>
                                         <th>TOTAL SCORE</th>
                                         <th>GRADE</th>
-                                        <th>UPDATE</th>
-                                        <!-- Add more headers if needed -->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% uploadedResult.forEach(user => { %>
+                                    <% if (user && user.courses && user.courses.length > 0) { %>
                                         <% user.courses.forEach(course => { %>
                                             <tr>
-                                                <td><%= user.name %> </td>
-                                                <td><%= user.matric %> </td>
-                                                <td><%= user.department %> </td>
-                                                <td><%= user.section %> </td>
-                                                <td><%= user.level %> </td>
-                                                <td><%= user.semester %> </td>
-                                                <td><%= course.course_title %> </td>
-                                                <td><%= course.course_code %> </td>
-                                                <td><%= course.course_unit %> </td>
-                                                <td><%= course.assessment1 %> </td>
-                                                <td><%= course.assessment2 %> </td>
-                                                <td><%= course.exam_score %> </td>
-                                                <td><%= course.total_score %> </td>
-                                                <td><%= course.grade %> </td>
-                                                <td><a href="/admin/update/result?id=<%= user._id %>"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                                <td><%= course.course_title %></td>
+                                                <td><%= course.course_code %></td>
+                                                <td><%= course.course_unit %></td>
+                                                <td><%= course.assessment1 %></td>
+                                                <td><%= course.assessment2 %></td>
+                                                <td><%= course.exam_score %></td>
+                                                <td><%= course.total_score %></td>
+                                                <td><%= course.grade %></td>
                                             </tr>
-                                        <% }); %>                                          
-                                    <% }); %>
+                                        <% }); %>  
+                                    <% } %>                                        
                                 </tbody>
                             </table>
                         </div>
@@ -104,5 +94,7 @@
             });
         });
     </script>
+          <script src="/js/staffDashBord.js"></script>
+
 </body>
 </html>

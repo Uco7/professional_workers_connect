@@ -6,11 +6,12 @@
 }
 .notification{
     position: relative;
+    left:20rem
 }
 .notification #red{
     position: absolute;
-    left: 8px;
-    bottom: 1rem;
+   left: 0.5rem;
+   bottom:1rem ;
     border-radius: 50%;
     width: 12px;
     height: 12px;
@@ -24,12 +25,15 @@
 
 
 }
+
 .accordion{
-    /* width: 500px;
-    position: absolute;
-    left: 20%; */
-    /* display: none; */
-    background-color: aqua;
+    width: 500px;
+    position:relative;
+    left: 40rem;
+    bottom: 63rem;
+    z-index: 1;
+    display: none;
+  
 
 }
  .sidebar{

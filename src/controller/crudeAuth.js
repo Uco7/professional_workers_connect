@@ -51,6 +51,49 @@ module.exports={
 
 },
 
+staffViewUploadedResult: async (req, res) => {
+    try {
+        const { matric, section, level } = req.query;
+
+        if (matric && section && level) {
+            // Find the result based on the provided criteria
+            const result = await Result.findOne({
+                matric: matric,
+                section: section,
+                level: level
+            }).populate('student');
+
+            if (result) {
+                res.status(200).json({
+                    status: "success",
+                    user: {
+                        ...result._doc // Spread the result object
+                    }
+                });
+            } else {
+                res.status(404).json({
+                    status: "fail",
+                    message: "No result found for the provided criteria"
+                });
+            }
+        } else {
+            res.status(400).json({
+                status: "fail",
+                message: "Matric number, section, and level must be provided"
+            });
+        }
+    } catch (error) {
+        console.error("Error fetching user result:", error);
+        res.status(500).json({
+            status: "error",
+            message: error.message
+        });
+    }
+},
+
+
+
+
 adminPostEmail: async (req,res)=>{
     const { name, email,sender_email, message, subject } = req.body;
     const sentAt = new Date();
@@ -160,6 +203,46 @@ notifyUser:async(req,res)=>{
         })
         
     }
+
+},
+staffAllComplaint: async(req,res)=>{
+    try {
+        if(req.query.id){
+            const  complaintId=req.query.id;
+            const complaint=await Complaint.findById(complaintId).populate('student')
+            if(!complaint){
+                return res.status(404).json({
+                    status:' no complaint found'
+                })
+            }
+            else{
+                console.log('single complaint',complaint)
+                res.status(200).json({
+                    status:"success",
+                    complaint
+                })
+            }
+        }
+        else{
+            const allComplaint=await Complaint.find().populate('student')
+            if(allComplaint){
+                console.log("all complaint",allComplaint);
+                res.status(200).json({
+                    status:"success",
+                    allComplaint
+                })
+            }
+        }
+    
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            error:error.message
+        })
+        
+    }
+
 
 },
 allComplaint: async(req,res)=>{

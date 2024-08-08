@@ -33,12 +33,20 @@
 
 
 }
+.accordion .accordion-button{
+    background-color:rgb(255, 135, 0);
+    color: white;
+
+}
 .accordion{
-    /* width: 500px;
-    position: absolute;
-    left: 20%; */
-    /* display: none; */
-    background-color: aqua;
+   
+    
+    width: 500px;
+    position: relative;
+    z-index: 1;
+    left: 20rem;
+    bottom: 14rem;
+    display: none;
 
 }
  .sidebar{

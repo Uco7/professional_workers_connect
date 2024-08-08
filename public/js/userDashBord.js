@@ -17,7 +17,9 @@ $(".fa-regular.fa-bell").click(function(event) {
     event.preventDefault();
     $(".box-cont, .check-result").css("display", "none");
     $(".accordion").toggle();
-    $(".box-cont").css("display","flex")
+    $(".box-cont").css("display","flex");
+    $("#complaintSection").css("display","none");
 });
+
 
 

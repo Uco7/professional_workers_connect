@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profile Page</title>
+    <title>Student Complaint Page</title>
     <link rel="stylesheet" href="/css/adminProfile.css">
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -13,11 +13,11 @@
         <form class="row g-3" action="/admin/store/ref/complaints" method="post" enctype="multipart/form-data"  id="form">
             <div class="container text-center image">
                 <div class="wrapImg1">
-                <img src="<%= 'data:image/jpeg;base64,' + complaint?.registeredCourse %>" alt="Registered Course Image" style="width: 600px; height: 400px; border-radius: 1px;">
+                <img src="<%= 'data:image/jpeg;base64,' + complaint?.registeredCourse %>" alt="Registered Course Image" id="img1">
                 <input type="hidden" name="existingRegisteredCourse" value="<%= complaint?.registeredCourse %>">
             </div>
             <div class="wrapImg2">
-                <img src="<%= 'data:image/jpeg;base64,' + complaint?.result %>" alt="Result Image" style="width: 700px; height: 600px; border-radius: 1px; margin-top: -5rem;">
+                <img src="<%= 'data:image/jpeg;base64,' + complaint?.result %>" alt="Result Image" id="img2" >
                 <input type="hidden" name="existingResult" value="<%= complaint?.result %>">
             </div>
             </div>
@@ -34,7 +34,7 @@
 
             <div class="col-md-6">
                 <label for="middle_name" class="form-label">Middle Name</label>
-                <input type="text" class="form-control" name="middle_name" value="<%= complaint?.student?.middle_name %>" required>
+                <input type="text" class="form-control" name="middle_name" value="<%= complaint?.student?.middle_name %>" >
             </div>
 
             <div class="col-md-6">

@@ -31,6 +31,9 @@
                             <div class="text-heading">All Registered Stafs</div>
                             <input type="text" id="customSearchBox" class="form-control custom-search-input" placeholder="Search...">
                         </div>
+                         <!-- including admin sidebar -->
+                 <%- include('_includeFolder/adminAcordium') %>
+                 <!-- including admin sidebar -->
                         <div class="table-responsive">
                             <table id="studentTable" class="table table-bordered table1">
                                 <thead>
@@ -48,16 +51,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% for(let i=0; i<registeredStudents.length;i++){ %>
+                                    <% for(let i=0; i<registeredStaff.length;i++){ %>
                                         <tr>
                                             <td><%= i+1 %></td>
-                                            <td><%= registeredStudents[i].fname %> <%= registeredStudents[i].middle_name %> <%= registeredStudents[i].lname %></td>
-                                            <td><%= registeredStudents[i].matric %></td>
-                                            <td><%= registeredStudents[i].email %></td>
-                                            <td><%= registeredStudents[i].phone_no %></td>
-                                            <td><%= registeredStudents[i].date_of_birth %></td>
-                                            <td><%= registeredStudents[i].department %></td>
-                                            <td><%= registeredStudents[i].gender %></td>
+                                            <td><%= registeredStaff[i].fname %>   <%= registeredStaff[i].lname %></td>
+                                          
+                                            <td><%= registeredStaff[i].email %></td>
+                                            <td><%= registeredStaff[i].phone_no %></td>
+                                            <td><%= registeredStaff[i].address %></td>
+                                            <td><%= registeredStaff[i].date_of_birth %></td>
+                                          
+                                            <td><%= registeredStaff[i].gender %></td>
+                                            <td><%= registeredStaff[i].state %></td>
+                                            <td><%= registeredStaff[i].LGA %></td>
+                                           
                                             <td id="view-td"><i class="fa-solid fa-pen-to-square"></i></td>
                                             <td id="view-td"><i class="fa-solid fa-trash"></i></td>
                                         </tr>

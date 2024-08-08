@@ -73,78 +73,62 @@ module.exports={
     }
 },
 
+
 uploadResult: async (req, res) => {
   try {
-    const { name, matric, department, section, level, semester } = req.body;
+      const { name, matric, department, section, level, semester, courses } = req.body;
 
-    // Extract and parse courses data from the request body
-    const courses = [];
-    Object.keys(req.body).forEach(key => {
-      const match = key.match(/courses\[(\d+)\]\[(\w+)\]/);
-      if (match) {
-        const index = match[1];
-        const field = match[2];
+      // Log the parsed courses array
+      console.log("Parsed courses array:", courses);
 
-        // Ensure the index exists in the courses array
-        if (!courses[index]) {
-          courses[index] = {};
-        }
-
-        // Add the field to the appropriate course object
-        courses[index][field] = req.body[key];
+      // Validate the courses array
+      if (!Array.isArray(courses) || courses.length === 0) {
+          return res.status(400).json({
+              status: "failure",
+              message: "Courses array is empty or invalid."
+          });
       }
-    });
 
-    // Convert numeric fields to numbers
-    courses.forEach(course => {
-      course.course_unit = parseInt(course.course_unit, 10);
-      course.assessment1 = parseInt(course.assessment1, 10);
-      course.assessment2 = parseInt(course.assessment2, 10);
-      course.exam_score = parseInt(course.exam_score, 10);
-      course.total_score = parseInt(course.total_score, 10);
-    });
+      // Find the user by matric
+      const user = await User.findOne({ matric });
 
-    // Find the user by matric
-    const user = await User.findOne({ matric });
+      if (!user) {
+          return res.status(404).json({
+              status: "failure",
+              message: "User not found"
+          });
+      }
 
-    if (!user) {
-      return res.status(404).json({
-        status: "failure",
-        message: "User not found"
+      // Create a new result instance with the parsed data
+      const userResult = new Result({
+          student: user._id,
+          name,
+          matric,
+          department,
+          section,
+          level,
+          semester,
+          courses
       });
-    }
 
-    // Create a new result instance with the parsed data
-    const userResult = new Result({
-      student: user._id,
-      name,
-      matric,
-      department,
-      section,
-      level,
-      semester,
-      courses
-    });
+      // Save the result to the database
+      await userResult.save();
 
-    // Save the result to the database
-    await userResult.save();
-
-    // Send a success response
-    res.status(201).json({
-      status: "success",
-      userResult
-    });
+      // Send a success response
+      res.status(201).json({
+          status: "success",
+          userResult
+      });
   } catch (error) {
-    console.error(error);
-    res.status(400).json({
-      status: "failure",
-      message: "User registration failed",
-      error: error.message
-    });
+      console.error(error);
+      res.status(400).json({
+          status: "failure",
+          message: "Result upload failed",
+          error: error.message
+      });
   }
 },
 
- 
   
   studentViewResult:async(req,res)=>{
     try {
@@ -160,7 +144,7 @@ uploadResult: async (req, res) => {
         console.log("result found",result);
   
       
-       res.render("./userView/studentResult",{result,notify})
+       res.render("./userView/studentResult",{result,notify,user})
       }
       else{
         res.status(400).json({
@@ -217,7 +201,9 @@ uploadResult: async (req, res) => {
       
     }
   },
+
   updateResult: async(req,res)=>{
+    
     try {
         if(req.params.id){
           const resultId=req.params.id;

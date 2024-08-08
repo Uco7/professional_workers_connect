@@ -35,3 +35,8 @@ body{
     font-size: larger;
     font-weight: 600;
 }
+.card-body #mat, #matric{
+    /* display: none; */
+   
+   
+}

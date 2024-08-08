@@ -1,0 +1,118 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Uploaded Result Page</title>
+    <link rel="stylesheet" href="/css/staffDashBord.css">
+
+    <!-- <link rel="stylesheet" href="/css/actors.css"> -->
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+</head>
+<body>
+<!-- staff   nav bar -->
+<%- include('_staffIncludeFolder/staffNavBar') %>
+<!-- staff   nav bar -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <!-- including admin sidebar -->
+                       <%- include('_staffIncludeFolder/staffSideBar') %>
+                <!-- including admin sidebar -->
+            </div>
+            
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+                <div class="wrapp-box bx">
+                    <div class="container box-cont">
+                        <div class="resolve-complaint1">
+                            <div class="text-heading">All  Uplaoded Results</div>
+                            <input type="text" id="customSearchBox" class="form-control custom-search-input" placeholder="Search...">
+                        </div>
+                         <!-- including admin sidebar -->
+                         <%- include('_staffIncludeFolder/staffAcordium') %>
+                         <!-- including admin sidebar -->
+                        <div class="table-responsive tb">
+                            <table id="tb" class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Student Name</th>
+                                        <th>Matric Number</th>
+                                        <th>Department</th>
+                                        <th>Section</th>
+                                        <th>Level</th>
+                                        <th>Semester</th>
+                                        <th>COURSE TITLE</th>
+                                        <th>COURSE CODE</th>
+                                        <!-- <th>COURSE UNIT</th>
+                                        <th>ASSESMENT1</th>
+                                        <th>ASSESMENT2</th>
+                                        <th>EXAM SCORE</th>
+                                        <th>TOTAL SCORE</th>
+                                        <th>GRADE</th> -->
+                                        <th>UPDATE</th>
+                                        <th>VIEW</th>
+                                        <!-- Add more headers if needed -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <% uploadedResult.forEach(user => { %>
+                                        <% user.courses.forEach(course => { %>
+                                            <tr>
+                                                <td><%= user.name %> </td>
+                                                <td><%= user.matric %> </td>
+                                                <td><%= user.department %> </td>
+                                                <td><%= user.section %> </td>
+                                                <td><%= user.level %> </td>
+                                                <td><%= user.semester %> </td>
+                                                <td><%= course.course_title %> </td>
+                                                <td><%= course.course_code %> </td>
+                                      
+                                                <td style=""><a href="/staff/view/update/result/page?id=<%= user._id %>"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                                <td><a href="/staff/view/user/result?matric=<%= user.matric %>&section=<%= user.section %>&level=<%= user.level %>&courseCode=<%= course.course_code %>">
+                                                </tr>
+                                        <% }); %>                                          
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Your script imports and custom scripts go here -->
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var table = new DataTable('#resultTable', {
+                paging: true, // Enable pagination
+                pageLength: 10, // Number of rows to display per page
+                lengthChange: false, // Disable the option to change the number of rows displayed
+                searching: true, // Enable search functionality
+                info: false // Disable info text "Showing X to Y of Z entries"
+            });
+
+            // Apply custom search
+            $('#customSearchBox').on('keyup', function() {
+                table.search($(this).val()).draw();
+            });
+        });
+    </script>
+          <script src="/js/staffDashBord.js"></script>
+
+</body>
+</html>
+
+        

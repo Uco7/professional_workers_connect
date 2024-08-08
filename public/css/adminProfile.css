@@ -45,3 +45,21 @@ text-shadow:  2px 4px #fff;
     border: 2px solid;
 
 }
+#complaintSection form .image #img1{
+    width: 600px;
+    height: 500px;
+    margin: 20px;
+    padding: 20px;
+}
+#complaintSection form .image #img2{
+    width: 600px;
+    height: 500px;
+    margin: 30px;
+    padding: 20px;
+}
+#complaintSection form .image {
+   display: flex;
+   flex-direction: row;
+  padding: 10px;
+  margin: 20px;
+}

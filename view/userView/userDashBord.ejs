@@ -35,7 +35,7 @@
                                 <li>Lay complaint about your result without, stress</li>
                             </ul>
                         </div>
-                        <div class="box2 bg-success">
+                        <div class="box2 bg-secondry">
                             <h2>If You Need Any Help or Are Confused About Anything</h2>
                             <p>Kindly contact us through this email: ucheuc070@gmail.com</p>
                         </div>
@@ -53,15 +53,34 @@
                         </div>
                         <div class="col-md-6">
                             <label for="section">Section:</label>
-                            <input type="text" id="section" name="section" required class="form-control">
+                            <select name="section" id="section" class="form-control" required>
+                                <option value="">Choose Section</option>
+                                <option value="2020/2021">2020/2021</option>
+                                <option value="2021/2022">2021/2022</option>
+                                <option value="2022/2023">2022/2023</option>
+                                <option value="2023/2024">2023/2024</option>
+                                <option value="2024/2025">2024/2025</option>
+                                <option value="2025/2026">2025/2026</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label for="level">Level:</label>
-                            <input type="text" id="level" name="level" required class="form-control">
+                            <select name="level" id="level" class="form-control" required>
+                                <option value="">Choose Level</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                                <option value="300">300</option>
+                                <option value="400">400</option>
+                                <option value="500">500</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label for="semester">Semester:</label>
-                            <input type="text" id="semester" name="semester" required class="form-control">
+                            <select name="semester" id="semester" class="form-control" required>
+                                <option value="">Semester</option>
+                                <option value="first">First Semester</option>
+                                <option value="second">Second Semester</option>
+                            </select>
                         </div>
                         <button type="submit" id="btn-result" class="btn btn-primary">View Result</button>
                     </form>

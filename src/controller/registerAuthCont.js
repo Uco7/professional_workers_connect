@@ -50,7 +50,7 @@ module.exports = {
         const lnameRegex = /^[A-Za-z\s.'-]+$/;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[<,.])[^\s]{8,}$/;
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d<,.]{4,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d@$!%*?&<>^.,:;[\]{}()|~`#\-_/\\+=]{4,}$/;
 
         const phone_numberRegex = /^\+?\d{1,4}[-\s]?\d{1,15}$/;
         const addressRegex = /^[A-Za-z0-9\s.,#'-]+$/;
@@ -88,7 +88,7 @@ module.exports = {
       
         const emailRegex = /^(?=.{1,256}$)(?=.{1,64}@.{1,255}$)(?=.{1,255}\..{1,255}$)(?=.{2,})[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[<,.])[^\s]{8,}$/;
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d<,.]{4,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d@$!%*?&<>^.,:;[\]{}()|~`#\-_/\\+=]{4,}$/;
 
         const phone_numberRegex = /^\+?\d{1,4}[-\s]?\d{1,15}$/;
         const addressRegex = /^[A-Za-z0-9\s.,#'-]+$/;
@@ -126,15 +126,15 @@ module.exports = {
       
       
       else {
-        const fnameRegex = /^[A-Za-z\s.'-]+$/;
+const fnameRegex = /^[A-Za-z\s]{2,}$/; // Allows only letters and spaces, and requires at least two characters
         // const depregex = /^[A-Za-z\s.'-]+$/;
        const depregex= /^[A-Za-z\s.\/'-]+$/ ; // Adjusted regex
 
-        const lnameRegex = /^[A-Za-z\s.'-]+$/;
-        const m_nameRegex = /^[A-Za-z\s.'-]+$/;
+        const lnameRegex =  /^[A-Za-z\s]{2,}$/;
+        const m_nameRegex =  /^[A-Za-z\s]{2,}$/;
         const emailRegex = /^(?=.{1,256}$)(?=.{1,64}@.{1,255}$)(?=.{1,255}\..{1,255}$)(?=.{2,})[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[<,.])[^\s]{8,}$/;
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d<,.]{4,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d@$!%*?&<>^.,:;[\]{}()|~`#\-_/\\+=]{4,}$/;
 
         const phone_numberRegex = /^\+?\d{1,4}[-\s]?\d{1,15}$/;
         const addressRegex = /^[A-Za-z0-9\s.,#'-]+$/;
@@ -143,17 +143,22 @@ module.exports = {
         const matricRegex = /^\d{4}\/[A-Z]+\/\d+$/;
         const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
-        if (!fnameRegex.test(fname)) throw new Error("Invalid first name format");
+        if (!fnameRegex.test(fname)) throw new Error("First name must contain at least two letters and no special characters.");
         if (!depregex.test(department)) throw new Error("Invalid department format");
-        if (!lnameRegex.test(lname)) throw new Error("Invalid last name format");
-        if (!m_nameRegex.test(middle_name)) throw new Error("Invalid middle name format");
+        if (!lnameRegex.test(lname)) throw new Error("First name must contain at least two letters and no special characters.");
+        if(middle_name&& middle_name.trim()!==""){
+
+          if (!m_nameRegex.test(middle_name)){
+            throw new Error("First name must contain at least two letters and no special characters.");
+          } 
+        }
         if (!emailRegex.test(email)) throw new Error("Invalid email format");
         if (!passwordRegex.test(password)) throw new Error("Invalid password format");
         if (!phone_numberRegex.test(phone_no)) throw new Error("Invalid phone number format");
         if (!addressRegex.test(address)) throw new Error("Invalid address format");
         if (!stateRegex.test(state)) throw new Error("Invalid state format");
-        if (!lgaRegex.test(LGA)) throw new Error("Invalid LGA format");
         if (!matricRegex.test(matric)) throw new Error("Invalid matric format");
+        if (!lgaRegex.test(LGA)) throw new Error("Invalid LGA format");
         if (!dateRegex.test(date_of_birth)) throw new Error("Invalid date format");
 
       const newUser = await User.create({
@@ -177,9 +182,20 @@ module.exports = {
   },
    login :async (req, res) => {
     try {
-        const { email, password, matric, role } = req.body;
+      
+      
+      const { email, password, matric, role } = req.body;
+      
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d@$!%*?&<>^.,:;[\]{}()|~`#\-_/\\+=]{4,}$/;
 
-        if (role === "admin") {
+      const emailRegex = /^(?=.{1,256}$)(?=.{1,64}@.{1,255}$)(?=.{1,255}\..{1,255}$)(?=.{2,})[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      
+      if (role === "admin") {
+          if (!emailRegex.test(email)) throw new Error("Invalid email format");
+        
+
+          if (!passwordRegex.test(password)) throw new Error("Invalid password format");
+
             const loginAdmin = await Admin.login(email, password);
             if (!loginAdmin) {
                 return res.status(400).send({ error: 'Invalid email or password' });
@@ -194,6 +210,13 @@ module.exports = {
             return res.redirect('/admin/dashBord');
         }
         else if (role==="staff") {
+          const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d@$!%*?&<>^.,:;[\]{}()|~`#\-_/\\+=]{4,}$/;
+          const emailRegex = /^(?=.{1,256}$)(?=.{1,64}@.{1,255}$)(?=.{1,255}\..{1,255}$)(?=.{2,})[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          if (!emailRegex.test(email)) throw new Error("Invalid email format");
+        
+
+          if (!passwordRegex.test(password)) throw new Error("Invalid password format");
+
           const loginStaff = await Staff.login(email, password);
           if (!loginStaff) {
               return res.status(400).send({ error: 'Invalid email or password' });
@@ -210,6 +233,10 @@ module.exports = {
         }
         
         else {
+          const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d@$!%*?&<>^.,:;[\]{}()|~`#\-_/\\+=]{4,}$/;
+          const matricRegex = /^\d{4}\/[A-Z]+\/\d+$/;
+          if (!passwordRegex.test(password)) throw new Error("Invalid password format");
+          if (!matricRegex.test(matric)) throw new Error("Invalid matric format");
             const loginUser = await User.login(matric, password);
             if (!loginUser) {
                 return res.status(400).send({ error: 'Invalid matric or password' });

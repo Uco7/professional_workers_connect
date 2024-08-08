@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>upload Result Page</title>
-    <link rel="stylesheet" href="/css/uploadResult.css">
+    <!-- <link rel="stylesheet" href="/css/uploadResult.css"> -->
+    <link rel="stylesheet" href="/css/staffDashBord.css">
+
     <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">    
 </head>
 <body>
-<!-- including admin navbar -->
-<%- include('_includeFolder/adminNav') %>
-<!-- including admin navbar -->
+<!-- staff   nav bar -->
+<%- include('_staffIncludeFolder/staffNavBar') %>
+<!-- staff   nav bar -->
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-3 col-lg-2 sidebar">
                 <!-- including admin sidebar -->
-                <%- include('_includeFolder/_adminSideBar') %>
+                       <%- include('_staffIncludeFolder/staffSideBar') %>
                 <!-- including admin sidebar -->
             </div>
+                             
             <div class="col-12 col-md-9 col-lg-10 main-content">
                 <div class="wrapp-table">
-                    <form id="registrationForm" action="/admin/upload/result" method="POST">
-                        <div class="row">
+                    <form id="registrationForm"  >
+                        <div class="row user-setion">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="first_name" class="form-label">Full Name:</label>
@@ -67,7 +71,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="wrapp-table">
+        
+                        <div class="table-responsive">
                             <table class="table table-bordered table1">
                                 <thead>
                                     <tr>
@@ -100,17 +105,22 @@
                     </form>
                 </div>
             </div>
+            <!-- including admin sidebar -->
+            <%- include('_staffIncludeFolder/staffAcordium') %>
+            <!-- including admin sidebar -->
         </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let courseIndex = 1;
-
-            document.getElementById('addCourse').addEventListener('click', function () {
-                const tbody = document.getElementById('coursesTableBody');
-                const row = document.createElement('tr');
-                
-                row.innerHTML = `
+        document.addEventListener('DOMContentLoaded', function() {
+            const addCourseButton = document.getElementById('addCourse');
+            const coursesTableBody = document.getElementById('coursesTableBody');
+    
+            let courseIndex = 1; // Start from 1 since the first row already has index 0
+    
+            addCourseButton.addEventListener('click', function() {
+                const newRow = document.createElement('tr');
+    
+                newRow.innerHTML = `
                     <td data-label="COURSE TITLE"><input type="text" name="courses[${courseIndex}][course_title]" required></td>
                     <td data-label="COURSE CODE"><input type="text" name="courses[${courseIndex}][course_code]" required></td>
                     <td data-label="COURSE UNIT"><input type="number" name="courses[${courseIndex}][course_unit]" required></td>
@@ -120,13 +130,17 @@
                     <td data-label="TOTAL SCORE"><input type="number" name="courses[${courseIndex}][total_score]" required></td>
                     <td data-label="GRADE"><input type="text" name="courses[${courseIndex}][grade]" required></td>
                 `;
-                
-                tbody.appendChild(row);
-                courseIndex++;
+    
+                coursesTableBody.appendChild(newRow);
+                courseIndex++; // Increment the courseIndex for the next row
             });
         });
     </script>
+    
     <script src="/jquery/dist/jquery.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="/js/uploadResult.js"></script>
+    <script src="/js/staffDashBord.js"></script>
+
 </body>
 </html>

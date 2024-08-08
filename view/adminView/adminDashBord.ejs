@@ -47,6 +47,9 @@
                         </div>
                     </div>
                 </div>
+                 <!-- including admin sidebar -->
+                 <%- include('_includeFolder/adminAcordium') %>
+                 <!-- including admin sidebar -->
                 <div class="wrapp-table">
                     <div class="table-container">
                         <div class="resolve-complaint">
@@ -60,7 +63,7 @@
                                     <th>S/N</th>
                                     <th>NAME</th>
                                     <th>MATRIC</th>
-                                    <th>DEPARTMENT</th>
+                                    <!-- <th>DEPARTMENT</th> -->
                                     <th>COMPLAINT DATE</th>
                                     <th>VIEW</th>
                                 </tr>
@@ -71,7 +74,6 @@
                                         <td><%= i + 1 %></td>
                                         <td><%= allComplaints[i].student.fname %> <%= allComplaints[i].student.lname %></td>
                                         <td><%= allComplaints[i].student.matric %></td>
-                                        <td><%= allComplaints[i].student.department %></td>
                                         <td><%= new Date(allComplaints[i].complaint_date).toLocaleDateString() %></td>
                                        
                                         <td id="view-td"><a href="/admin/view/complaints/form?id=<%= allComplaints[i]._id %>">View</a>
@@ -92,6 +94,7 @@
                                     <th>NAME</th>
                                     <th>MATRIC</th>
                                     <th>DATE</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -121,64 +124,9 @@
         </div>
     </div>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const rowsPerPage = 5;
-            let currentPage = 1;
-            const table = document.getElementById('studentTable');
-            const tableBody = document.getElementById('studentTableBody');
-            const paginationControls = document.getElementById('paginationControls');
-            const rows = Array.from(tableBody.querySelectorAll('tr'));
-            const totalRows = rows.length;
-            const totalPages = Math.ceil(totalRows / rowsPerPage);
-
-            function displayRows() {
-                tableBody.innerHTML = '';
-                const startIndex = (currentPage - 1) * rowsPerPage;
-                const endIndex = Math.min(startIndex + rowsPerPage, totalRows);
-                for (let i = startIndex; i < endIndex; i++) {
-                    tableBody.appendChild(rows[i]);
-                }
-            }
-
-            function updatePagination() {
-                paginationControls.innerHTML = '';
-                for (let i = 1; i <= totalPages; i++) {
-                    const button = document.createElement('button');
-                    button.innerText = i;
-                    button.classList.add('paginate-button');
-                    if (i === currentPage) {
-                        button.classList.add('active');
-                    }
-                    button.addEventListener('click', function() {
-                        currentPage = i;
-                        displayRows();
-                        updatePagination();
-                    });
-                    paginationControls.appendChild(button);
-                }
-            }
-
-            // Custom search functionality
-            const customSearchBox = document.getElementById('customSearchBox');
-            customSearchBox.addEventListener('keyup', function() {
-                const searchTerm = this.value.toLowerCase();
-                const filteredRows = rows.filter(row => {
-                    return row.innerText.toLowerCase().includes(searchTerm);
-                });
-                totalRows = filteredRows.length;
-                totalPages = Math.ceil(totalRows / rowsPerPage);
-                currentPage = 1;
-                displayRows(filteredRows);
-                updatePagination(filteredRows);
-            });
-
-            // Initialize table
-            displayRows();
-            updatePagination();
-        });
-    </script>
+    
     <script src="/jquery/dist/jquery.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="/js/adminDashBord.js"></script>
 </body>
 </html>

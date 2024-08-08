@@ -4,6 +4,37 @@
     
     box-shadow: 2px 4px 2px #ddd;
 }
+.notification{
+    position: relative;
+    left:20rem
+}
+.notification #red{
+    position: absolute;
+   left: 0.5rem;
+   bottom:1rem ;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    align-items: center;
+    font-weight: 600;
+     font-size: 10px;
+     color: #fff;
+    background-color: red;
+   
+
+
+}
+
+.accordion{
+    width: 500px;
+    position:relative;
+    left: 20rem;
+    bottom: 15rem;
+    display: none;
+  
+
+}
 .sidebar{
     background-color:rgb(255, 135, 0);
   

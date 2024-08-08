@@ -100,8 +100,8 @@ staffProfilePage: async (req, res) => {
     try {
         const staff = req.loginStaff;
    
-       
-        res.render("./staffView/staffProfile",{staff});
+       console.log('staff data',staff);
+        res.render("./staffView/staffProfile",{user:staff});
     } catch (error) {
         console.error(error);
         if (!res.headersSent) {
@@ -217,7 +217,94 @@ staffProfilePage: async (req, res) => {
        
         res.render("./staffView/staffRegisterCourse",{staffId})
     },
-   
+   updateResult: async(req, res)=>{
+        
+        try {
+            const resultId=req.query.id
+            response=await fetch(`http://localhost:5000/api/admin/view/uploaded/result?id=${resultId}`)
+            const data= await response.json()
+            const user=data.result
+            console.log('all user result for update in fetch',user);
+            res.render("./staffView/updateResult",{user})
+       
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error)
+            
+        }
+    },
+    adminViewResult: async(req, res)=>{
+        try {
+         
+            response=await fetch("http://localhost:5000/api/admin/view/uploaded/result")
+            const data= await response.json()
+            const uploadedResult=data.result
+            console.log('all user result in fetch',uploadedResult);
+            
+        res.render("./staffView/viewUploadedResult",{uploadedResult})
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error)
+            
+        }
+    },
+    uploadResult: (req, res)=>{
+        res.render("./staffView/uploadResult")
+    },
+    staffAllComplaint: async(req, res)=>{
+        try {
+        
+            const response= await fetch("http://localhost:5000/api/staff/all/complaints")
+            const data=await response.json()
+            const allComplaints=data.allComplaint
+        
+        
+            console.log('all complaint in fetch',allComplaints );
+        
+            res.render("./staffView/staffViewAllComplaint",{allComplaints})
+          } catch (error) {
+            console.log(error);
+            res.status(500).json({ error: error.message });
+          }
+        
+
+    },
+    staffViewUserResult: async (req, res) => {
+        try {
+            // Retrieve parameters from the query
+            const { matric, section, level, courseCode } = req.query;
+            console.log('Query Parameters:', { matric, section, level, courseCode }); // Log the query parameters
+    
+            // Check if all required parameters are provided
+            if (matric && section && level && courseCode) {
+                // Construct the URL with query parameters
+                const apiUrl = `http://localhost:5000/api/staff/view/user/result?matric=${matric}&section=${section}&level=${level}&courseCode=${courseCode}`;
+                const response = await fetch(apiUrl);
+    
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+    
+                const data = await response.json();
+                console.log('API Response Data:', data); // Log the API response data
+    
+                const user = data.user;
+                if (!user) {
+                    throw new Error('No user data found in the response');
+                }
+      
+                console.log('User Data:', user);
+                res.render("./staffView/staffViewUserResult", { user });
+            } else {
+                throw new Error('Matric number, section, level, and course code must be provided');
+            }
+        } catch (error) {
+            console.error('Error fetching user result:', error);
+            res.status(500).send({ status: 'error', message: error.message });
+        }
+    },
+    
+      
    
    //    staff page................................................................................................
 
@@ -280,21 +367,7 @@ staffProfilePage: async (req, res) => {
           }
         
     },
-    adminViewResult: async(req, res)=>{
-        try {
-         
-            response=await fetch("http://localhost:5000/api/admin/view/uploaded/result")
-            const data= await response.json()
-            const uploadedResult=data.result
-            console.log('all user result in fetch',uploadedResult);
-            
-        res.render("./adminView/viewUploadedResult",{uploadedResult})
-        } catch (error) {
-            console.log(error);
-            res.status(500).send(error)
-            
-        }
-    },
+    
     feedbackpage: async (req, res) => {
         try {
             const response = await fetch("http://localhost:5000/api/admin/find/all/resolve/complaints");
@@ -342,25 +415,8 @@ viewFeedback: async (req, res) => {
 
         res.render('./adminView/adminProfile', { admin });
     },
-    uploadResult: (req, res)=>{
-        res.render("./adminView/uploadResult")
-    },
-    updateResult: async(req, res)=>{
-        
-        try {
-            const resultId=req.query.id
-            response=await fetch(`http://localhost:5000/api/admin/view/uploaded/result?id=${resultId}`)
-            const data= await response.json()
-            const user=data.result
-            console.log('all user result for update in fetch',user);
-            res.render("./adminView/updateResult",{user})
-       
-        } catch (error) {
-            console.log(error);
-            res.status(500).send(error)
-            
-        }
-    },
+    
+    
     registeredStudent: async(req, res)=>{
 
 
@@ -378,16 +434,17 @@ viewFeedback: async (req, res) => {
     }
     
 },
-    registeredStaff:async (req, res)=>{
+   
+registeredStaff:async (req, res)=>{
         // about to right
         try{
-        const response = await fetch('http://localhost:5000/api/find/registered/stffs');
+        const response = await fetch('http://localhost:5000/api/find/registered/staffs');
         const data = await response.json();
-        const registeredStudents = data.allUser; // Accessing the allUsers array from the response
+        const registeredStaff = data.allStaffs; // Accessing the allUsers array from the response
     
-        console.log('Registered students',registeredStudents );
+        console.log('Registered students',registeredStaff );
     
-        res.render('./adminView/registeredStaffs',{registeredStudents});
+        res.render('./adminView/registeredStaffs',{registeredStaff});
       } catch (error) {
         console.log(error);
         res.status(500).json({ error: error.message });

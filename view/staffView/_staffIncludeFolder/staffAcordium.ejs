@@ -1,28 +1,14 @@
-
 <div class="accordion accordion-flush" id="accordionFlushExample"  >
    
     <div class="accordion-item">
         <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                <%if(notify){  %>
-
-                    New notification<br>
-                    <%= notify.sentAt %>
-               <%  } else { %>
-                  No new notification<br>
-               <%  }%>
+                New notification<br>
             </button>
         </h2>
         <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
-                <%if(notify){  %>
-
-                  
-                    <%= notify.message %>
-                  
-               <%  } else { %>
-                  No new notification<br>
-               <%  }%>
+              
             </div>
         </div>
     </div>

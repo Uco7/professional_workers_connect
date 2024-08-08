@@ -29,15 +29,18 @@ body{
 
 }
 .navbar{
-    background-color:#fff;
-    
-    box-shadow: 2px 4px 2px ;
+    background-color: mintcream !important;
+    color: aliceblue;
+
+    box-shadow: 2px 4px 2px rgb(236, 236, 240);
     }
     
     .sidebar{
-        background-color:rgb(236, 236, 240);
-    height: 100vh;
-    box-shadow: 2px 4px 2px ;
+      
+    background-color: #70837d;
+    color: aliceblue;
+    height: 150vh;
+    box-shadow: 2px 4px 2px rgb(236, 236, 240) ;
     
     
     }
@@ -53,7 +56,7 @@ body{
         }
         .sidebar .cont li{
             padding: 5px;
-            box-shadow:  0 1px 1px;
+            /* box-shadow:  0 1px 1px; */
          
             margin: 20px;
             text-align: center;
@@ -61,11 +64,15 @@ body{
     
     }
     .sidebar .cont li a{
-        color: black;
+        color: white;
         
         }
         .sidebar .cont li :hover{
-            background-color: #ddd;
+            
+            background-color: mintcream !important;
+            color: rgb(255, 136, 0) !important;
+
+
         
             
             }

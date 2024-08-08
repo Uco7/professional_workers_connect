@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complaint Page</title>
-    <link rel="stylesheet" href="/css/actors.css">
+    <link rel="stylesheet" href="/css/staffDashBord.css">
+
+    <!-- <link rel="stylesheet" href="/css/actors.css"> -->
     <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- DataTables CSS -->
@@ -12,15 +14,15 @@
     
 </head>
 <body>
-  <!-- including admin navbar -->
-  <%- include('_includeFolder/adminNav') %>
-  <!-- including admin navbar -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-3 col-lg-2 sidebar">
-                <!-- including admin sidebar -->
-                <%- include('_includeFolder/_adminSideBar') %>
-                <!-- including admin sidebar -->
+    <%- include('_staffIncludeFolder/staffNavBar') %>
+    <!-- staff   nav bar -->
+    
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-3 col-lg-2 sidebar">
+                    <!-- including admin sidebar -->
+                           <%- include('_staffIncludeFolder/staffSideBar') %>
+                    <!-- including admin sidebar -->
             </div>
             
             <div class="col-12 col-md-9 col-lg-10 main-content">
@@ -32,10 +34,11 @@
                             <input type="text" id="customSearchBox" class="form-control custom-search-input" placeholder="Search...">
                         </div>
                          <!-- including admin sidebar -->
-                 <%- include('_includeFolder/adminAcordium') %>
+                         <%- include('_staffIncludeFolder/staffAcordium') %>
+
                  <!-- including admin sidebar -->
-                        <div class="table-responsive">
-                            <table id="studentTable" class="table table-bordered table1">
+                        <div class="table-responsive tb">
+                            <table id="tb" class="table table-bordered table1">
                                 <thead>
                                     <tr>
                                         <th>S/N</th>
@@ -106,5 +109,7 @@
             });
             });
             </script>
+                  <script src="/js/staffDashBord.js"></script>
+
             </body>
             </html>
