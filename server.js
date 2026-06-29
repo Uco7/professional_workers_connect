@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 const sessionMiddleware = require("./src/helperMildware/session");
 const connectDb = require("./src/db/connectDb");
 const getpage = require("./src/route/getRoute");
-const postRoute = require("./src/route/postRoute");
+const postRoute = require("./src/route/postRoute");   
 
 const app = express();
 connectDb();
