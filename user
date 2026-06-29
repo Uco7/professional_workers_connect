@@ -1,0 +1,40 @@
+<div class="wrap-boxes">
+                    <% if (vendors && vendors.length > 0) { %>
+                        <% vendors.forEach(vendor => { %>
+                            <% 
+                            const vendorId = vendor._id.toString(); 
+                            const rating = vendorRatings[vendorId] || 0; 
+                            %>
+                            <div class="box-content">
+                                <div class="star-icon text-center">
+                                    <% 
+                                    const solidStars = Math.min(rating, 3); // Maximum 3 solid stars
+                                    const emptyStars = Math.max(0, 5 - solidStars); // Remaining are empty stars
+                                    for (let i = 0; i < solidStars; i++) { %>
+                                        <i class="fa-solid fa-star"></i>
+                                    <% }
+                                    for (let i = 0; i < emptyStars; i++) { %>
+                                        <i class="fa-regular fa-star"></i>
+                                    <% } %>
+                                </div>
+                                <div class="image-div text-center">
+                                    <% if (vendor.profileImage && vendor.imageType) { %>
+                                        <img src="data:<%= vendor.imageType %>;base64,<%= vendor.profileImage %>" alt="Profile Image">
+                                    <% } else { %>
+                                        <p>No image available</p>
+                                    <% } %>
+                                </div>
+                                <div class="image-txt text-center">
+                                    <p><%= vendor.userRef.fName %> <%= vendor.userRef.lName %></p>
+                                    <p><%= vendor.userRefs.job_title %></p>
+                                    <p><%= vendor.userRefs.address %>from  funai</p>
+                                    <button class="book">
+                                        <a href="/clients/book/vendor/page?id=<%= vendor._id %>&userId=<%= user._id %>">Book Now</a>
+                                    </button>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p>No verified vendors found.</p>
+                    <% } %>
+                </div>

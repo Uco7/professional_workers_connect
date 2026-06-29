@@ -32,6 +32,7 @@
                     <label for="first_name" class="form-label">First Name:</label>
                     <input type="text" class="form-control" id="first_name" name="fName" value="<%= vendor.userRef.fName %>">
                 </div>
+                <input type="text" name="vendorId" value="<%= vendor._id %>">
                 <div class="col-md-6">
                     <label for="last_name" class="form-label">Last Name:</label>
                     <input type="text" class="form-control" id="last_name" name="lName" value="<%= vendor.userRef.lName %>">
@@ -76,7 +77,6 @@
             <div class="col-md-4">
                 <label for="password" class="form-label">Office Address/address:</label>
                 <input type="text" class="form-control" id="address" name="address"value="<%= vendor.userRefs.address %>"  >
-                <input type="hidden" name="userId" >
 
             
             </div>
@@ -149,43 +149,79 @@
                             })
                  </script> -->
                  <script>
-                    document.querySelector('form').addEventListener('submit', async function(event) {
-                        event.preventDefault();
+                    // document.querySelector('form').addEventListener('submit', async function(event) {
+                    //     event.preventDefault();
                 
-                        const formData = new FormData(this);
-                        console.log("formdata",formData)
+                    //     const formData = new FormData(this);
+                    //     console.log("formdata",formData)
                 
-                        try {
-                            const response = await fetch(this.action, {
-                                method: 'POST',
-                                headers: {
-                                   'Content-Type': 'application/json'
-                                 },
-                      body: JSON.stringify(formData)
-                             });
+                    //     try {
+                    //         const response = await fetch(this.action, {
+                    //             method: 'POST',
+                    //             headers: {
+                    //                'Content-Type': 'application/json'
+                    //              },
+                    //   body: JSON.stringify(formData)
+                    //          });
 
                 
-                            if (response.ok) {
-                                alert("Vendor booked  successfully.");
-                                window.location.href = '/admin/vendors';
-                            } else {
-                                let errorMessage;
-                                if (response.status === 400) {
-                                    errorMessage = "Missing required fields. Please fill in all necessary information.";
-                                } else if (response.status === 409) {
-                                    errorMessage = "A vendor with this email already exists. Please use a different email.";
-                                } else {
-                                    errorMessage = "An error occurred while updating the vendor. Please try again later.";
-                                }
+                    //         if (response.ok) {
+                    //             alert("Vendor booked  successfully.");
+                    //             window.location.href = '/admin/vendors';
+                    //         } else {
+                    //             let errorMessage;
+                    //             if (response.status === 400) {
+                    //                 errorMessage = "Missing required fields. Please fill in all necessary information.";
+                    //             } else if (response.status === 409) {
+                    //                 errorMessage = "A vendor with this email already exists. Please use a different email.";
+                    //             } else {
+                    //                 errorMessage = "An error occurred while updating the vendor. Please try again later.";
+                    //             }
                 
-                                alert(errorMessage);
-                            }
-                        } catch (error) {
-                            console.error('Error submitting form:', error);
-                            alert('An unexpected error occurred. Please try again later.');
-                        }
-                    });
+                    //             alert(errorMessage);
+                    //         }
+                    //     } catch (error) {
+                    //         console.error('Error submitting form:', error);
+                    //         alert('An unexpected error occurred. Please try again later.');
+                    //     }
+                    // });
                 
+                              document.querySelector('form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+    console.log("form data as object", data);
+
+    try {
+        const response = await fetch(this.action, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            alert("Vendor booked successfully.");
+            window.location.href = '/index/page';
+        } else {
+            let errorMessage;
+            if (response.status === 400) {
+                errorMessage = "Missing required fields. Please fill in all necessary information.";
+            } else if (response.status === 409) {
+                errorMessage = "A vendor with this email already exists. Please use a different email.";
+            } else {
+                errorMessage = "An error occurred while updating the vendor. Please try again later.";
+            }
+            alert(errorMessage);
+        }
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('An unexpected error occurred. Please try again later.');
+    }
+});
+
                     </script>
                 
                  <script src="/jquery/jquery.min.js"></script>

@@ -3,590 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Home Page</title>
-    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <title>Online Professional Workers Connect</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
+
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg ">
-        <div class="container">
-            <h1 style="padding: 10px; font-size: larger;">Health <span id="care"> Care</span></h1>
-            <ul class="justify-content-center li-center ">
-                <li class="nav-item"> <a href="#">Services</a>  </li>
-                <li class="nav-item"> <a href="#">About Us</a>  </li>
-                <li class="nav-item"> <a href="#">Blog</a>  </li>
-                <li class="nav-item"> <a href="#">Pages</a>  </li>
-             
 
-            </ul>
-            <!-- <img src="logo" alt="logo"> -->
-            <ul class="nav justify-content-end">
-             
-                <li class="nav-item" >
-                    <a href="">Contactact Us</a>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a href="/" class="navbar-brand text-uppercase fw-bold">
+                <img src="/images/logo.png" alt="logo" onerror="this.style.display='none'"> Connect<span class="brand-accent">Pro</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#list1" aria-controls="list1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="list1">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a href="/about" class="nav-link">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/contact" class="nav-link">Contact Us</a>
+                    </li>
+
+                    <% if (user && user._id) { %>
+                        <li class="nav-item">
+                        </li>
+                        <li class="nav-item">
+                            <a href="/vendor/register/profession?id=<%= user._id %>" class="nav-link reg">Register Now</a>
+                        </li>
+                        <li class="nav-item">
+                        </li>
+                    <% } else { %>
+                        <li class="nav-item">
+                            <a href="/login" class="nav-link reg">Register Now</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/login" class="nav-link">Login</a>
+                        </li>
+                    <% } %>
+
+                    <li class="nav-item">
+                             <a href="/logout" class="  nav-link sub">Logout</a>
+
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
-<section class="bg-image">
-    <div class="over"></div>
-    <div class="container-fluid body-content">
-        <div class=" container wrap-txt">
 
-            <div class="text-large">
-                <h2>Providing an Exeptional <br> Patient Experience</h2>
+    <div id="carouselExampleAutoplaying" class="carousel slide hero-carousel" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/images/capinter.jpg" class="d-block w-100" alt="Carpentry services">
+                <div class="hero-fade"></div>
+                <div class="hero-caption">
+                    <p class="eyebrow">ConnectPro</p>
+                    <% if (user && user._id) { %>
+                        <h1>Welcome back,<br><span class="accent"><%= user.fName %>.</span></h1>
+                    <% } else { %>
+                        <h1>Trusted pros,<br><span class="accent">one tap away.</span></h1>
+                    <% } %>
+                    <p class="lead-copy">Find verified local vendors for every job, big or small.</p>
+                </div>
             </div>
-            <div class="text-small">
-                <div>Welcome  to where  exeptional experience is our top priority.</div>
-                
-                 <div> With compassionate core, State-of-the Art facility, and a patient centered aproach.</div> 
-                
-                
-               
-                    
-                    
-                    <div>We are dedicated to your well-being.Trusth us with your health, and experience the difference </div> 
+            <div class="carousel-item">
+                <img src="/images/woodwork.jpeg" class="d-block w-100" alt="Woodwork services">
+                <div class="hero-fade"></div>
+                <div class="hero-caption">
+                    <p class="eyebrow">ConnectPro</p>
+                    <h1>Skilled hands,<br><span class="accent">ready to work.</span></h1>
+                    <p class="lead-copy">From woodwork to wiring, our network has you covered.</p>
+                </div>
             </div>
-            <div type="button" class="btn-see"><a href="#">See services</a></div>
+            <div class="carousel-item">
+                <img src="/images/carrepia.jpeg" class="d-block w-100" alt="Auto repair services">
+                <div class="hero-fade"></div>
+                <div class="hero-caption">
+                    <p class="eyebrow">ConnectPro</p>
+                    <h1>Book a vendor<br><span class="accent">in minutes.</span></h1>
+                    <p class="lead-copy">Compare ratings, message vendors, and book with confidence.</p>
+                </div>
+            </div>
         </div>
-     
-        <div class="form">
-            <div class="col-md-6">
-                <div class="card mt-5 login form">
-                    <div class="card-header" >
-                        <h3 class="">Book Now</h3>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+    </div>
+
+    <div class="container services-intro">
+        <div class="intro-txt text-center">
+            <h2 id="buy"></h2>
+            <div class="container mt-4 vendor-callout">
+                <h4>Already a Vendor?</h4>
+                <span>Upload past and recent works now
+                    <a href="#" class="link-amber" data-bs-toggle="modal" data-bs-target="#emailModal">Click Here</a>
+                </span>
+            </div>
+        </div>
+
+        <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="emailModalLabel">Enter Your Email</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="card-body">
-                        <form action="/login" method="post">
-                        
-                            <div class="form-group">
-                                <input type="text" name="fName" id="fName" class="form-control" placeholder="First Name"   required>
+                    <div class="modal-body">
+                        <form id="emailForm" action="/find/vendor/by/email" method="post">
+                            <div class="mb-3">
+                                <label for="emailInput" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="emailInput" name="email" placeholder="Enter your email" required>
                             </div>
-                            <div class="form-group">
-                                <input type="text" name="lName" id="lName" class="form-control" placeholder="Last Name"   required>
-                                
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="address" id="address" class="form-control" placeholder="Address"   required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="phone_no" id="phone_no" class="form-control" placeholder="Phone Number"   required>
-                            </div>
-                            <div class="btn-cont ">
-                                <button type="submit" class="btn  btn-block">Book Appointment</button>
-                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Submit</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    </div>
-</section>
-<section class="services-section">
-
-    <div class="container ">
-        <div class="service-heading">
-            <h3>Our Special Services</h3>
-        </div>
-        <div class="p-txt">
-            <div>beyond simply providing medical care, our commitment is to</div>
-            <div>deliver services tailored to your unique needs.</div>
-        </div>
-    <div class="box">
-        <div class="box1">
-            <div class="icon">
-                <i class="fa-solid fa-flask-vial"></i>
-            </div>
-            <div class="icon1-title"><h4>
-                Laboratory test
-            </h4>
-        </div>
-            <div class="icon1-txt">
-                <div>Accurate Diagonstics, swift Result </div>
-                <div>experience top match laborating testing in our facility</div>
-            </div>
-            <div class="link-div"><a href="#"> Learn More</a></div>
-        </div>
-        <div class="box1">
-            <div class="icon">
-                <i class="fa-solid fa-notes-medical"></i>
-            </div>
-            <div class="icon1-title"><h4>Health Check</h4></div>
-            <div class="icon1-txt">
-                <div> Our thorough assessment and our expert</div>
-            <div> evaluation help you  stay positive  about your your health</div>
-            </div>
-            <div class="link-div"><a href="#"> Learn More</a></div>
-  
-        </div>
-        <div class="box1">
-            <div class="icon">
-                <i class="fa-solid fa-teeth-open"></i>
-
-            </div>
-            <div class="icon1-title"><h4>General Dentistry</h4></div>
-            <div class="icon1-txt">
-                <div> Experience comprehensive oral care</div>
-                <div>with dentistry. trusth us to keep </div>
-                <div>your smile healthy and bright</div>
-            </div>
-            <div class="link-div"><a href="#"> Learn More</a></div>
-        </div>
-  
-    </div>
-    
-    </div>
-</section >
-<section>
-
-    <div class="container">
-        <h4>About Us</h4>
-        <div class="wrap-section">
-            <div class="image-div1">
-                <img src="/image/doc3.jpg" alt="">
-    
-            </div>
-            <div class="about-txt">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-               
-               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-               
-               <p id="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br>
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br> quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <br>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-               
-            </div>
-          
-    
-        </div>
-    </div>
-</section>
-
-<section class="choose">
-    <div class="container">
-        <div class="choose-image">
-            <img src="/image/choose.jpg" alt="">
-        </div>
-        <div class="wrap-item">
-
-            <div class="choose-heading">
-                <h4>Why Choose Us</h4>
-               
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-               
-            </div>
-            <div class="item-cont">
-                <div class="wrap-item1">
-                    <div class="span"><i class="fa-solid fa-hand-holding-medical" id="choose-icon"></i> </div class="span"> 
-                    <div class="choose-txt">
-
-                        <h4 id="choose-h4">Intensive Care</h4>
-                        <p>cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="item-cont">
-                <div class="wrap-item1">
-                    
-                    <div class="span"> <i class="fa-solid fa-truck-medical " id="choose-icon"></i></div class="span"> 
-                    <div class="choose-txt">
-
-                        <h4 >Free Ambulance Car</h4>
-                        <p>cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item-cont">
-                <div class="wrap-item1">
-                    
-                    <div class="span"><i class="fa-solid fa-notes-medical" id="choose-icon"></i> </div class="span">
-                    <div class="choose-txt">
-                        <h4 id="choose-h4">Medical And Surgical Care</h4>
-                        <p>cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    
-                    </div>
-                   
-            </div>
-            </div> 
-            </div>
-        </div>
-        
-    
-
-</section>
-<section class="container ">
-    <div class="staffs"> 
-
-        
-        <div class="card" style="width: 18rem;">
-            <img src="/image/doctor.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h6>Dr. Sir Uc</h6>
-              <p class="card-text"> Lagos State University.</p>
-            </div>
-          </div>
-        <div class="card" style="width: 18rem;">
-            <img src="/image/doc2.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h6>Dr. Emmanuel</h6>
-              <p class="card-text"> Alex Ekwueme federal University</p>
-            </div>
-          </div>
-        <div class="card" style="width: 18rem;">
-            <img src="/image/doc3.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h6> Dr. Nwambeke</h6>
-              <p class="card-text"> Ebonyi State University.</p>
-            </div>
-          </div>
-    </div>
-
-</section>
-<section class="summary">
-    <div class="container">
-        <div class="cont">
-            <div class="cont1">
-                <h6> Health <span>Care </span></h6>
-                <div class="cont1-txt">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,<br> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<br> quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br>  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p>
-                </div>
-            </div>
-            <div class="about-summary">
-                <h6>About Us</h6>
-                <ul>
-                    <li> <a href="#">Home</a></li>
-                    <li> <a href="#"> About Us</a></li>
-                    <li> <a href="#">Blog</a></li>
-                    <li> <a href="#"> Work With Us</a></li>
-                    <li> <a href="#"> Terms &  Conditions</a></li>
-                </ul>
-            </div>
-            <div class="about-summary">
-                <h6>Services</h6>
-                <ul>
-                    <li> <a href="#">Search Terms</a></li>
-                    <li> <a href="#"> Advance Search</a></li>
-                    <li> <a href="#">Privacy & Policy</a></li>
-                    <li> <a href="#"> Suport Us</a></li>
-                    <li> <a href="#"> Our Stores</a></li>
-                </ul>
-            </div>
-            <div class="about-summary">
-                <h6>Contact Us</h6>
-                <ul>
-                    <li> <i class="fa-solid fa-phone"></i> <a href="#">+123 ikwo street</a></li>
-                    <li> <i class="fa-solid fa-envelope"></i><a href="#"> Suport@gmail.com</a></li>
-                    <li> <a href="#"> +123 customer Care </a></li>
-                    
-                </ul>
-            </div>
-        </div>
-    </div>  
-
-</section>
-<section  class="footer">
-    <footer class="copy"> @copy right 2024 </footer>
-    <div class="footer-icon ">
-        <i class="fa-brands fa-facebook" id="footer-icon"></i>
-        <i class="fa-brands fa-twitter" id="footer-icon"></i>
-        <i class="fa-brands fa-instagram" id="footer-icon"></i>
-    </div>
-</section>
-
-
-    
-=======
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
-
-</head>
-<body>
-  <nav  class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <div class="container">
-        <a href="#" class="navbar-brand text-uppercase fs-5" ><img src="" alt=""> logo</a>
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#list1">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="list1">
-            <ul class="navbar-nav sm-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">About Us </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Contact Us</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/vendor/register/profession?id=<%= user._id %>" class="nav-link reg"  >Register Now</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link sub">Subscribe</a>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-
-</nav>
-
-      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" style="width: 100%;">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="/images/capinter.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="/images/woodwork.jpeg" class="d-block w-100" alt="..." >
-          </div>
-          <div class="carousel-item">
-            <img src="/images/carrepia.jpeg" class="d-block w-100" alt="..." >
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-      <div class="container services-intro" >
-        <div class="intro-txt text-center">
-          <h2 id="buy"></h2>
-          <div class="container mt-5">
-            <h4 style="color: orange;">Already a Vendor?</h4>
-            <span>Upload past and recent works now <a href="#" style="color: #b8860B;" data-toggle="modal" data-target="#emailModal">Click Here</a></span>
-          </div>
-        </div>
-        <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="emailModalLabel">Enter Your Email</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form id="emailForm"  action="/find/vendor/by/email" method="post">
-                  <div class="form-group">
-                    <label for="emailInput">Email address</label>
-                    <input type="email" class="form-control" id="emailInput" name="email" placeholder="Enter your email" required>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="intro-text text-center">
-          <p>Pick a service from the  below list, and we will give   you a vendor close  within you reach</p>
+            <p>Pick a service from the list below, and we'll connect you with a trusted vendor near you.</p>
         </div>
-      </div>
-      <div class="container categories">
-        <div class="title">
-          <h4>Categories</h4>
+    </div>
+
+    <div class="container categories">
+        <div class="title text-center">
+            <p class="eyebrow text-center">Browse by trade</p>
+            <h4>Categories</h4>
         </div>
         <div class="wrap-boxes">
-          <div class="box1">
-            <div class="icon text-center"><i class="fa-solid fa-computer"></i></div>
-            <div class="text-center">Computer Enginers</div>
-          </div>
-          <div class="box1">
-            <div class="icon text-center"><i class="fa-solid fa-house-flood-water"></i></i></div>
-            <div class="text-center">Home Appliances</div>
-          </div>
-          <div class="box1">
-            <div class="icon text-center"><i class="fa-solid fa-bath"></i></div>
-            <div class="text-center">Plumbers</div>
-          </div>
-          <div class="box1">
-             <div class="icon text-center"><i class="fa-solid fa-mobile"></i></i></div>
-            <div class="text-center">ICT
-            
+            <div class="box1">
+                <div class="icon text-center"><i class="fa-solid fa-computer"></i></div>
+                <div class="text-center">Computer Engineers</div>
             </div>
-          </div>
-          <div class="box1 box-orange">
-             <div class="icon text-center"><i class="fa-solid fa-plug"></i></div>
-            <div class="text-center">Electricle Enginers</div>
-          </div>
-          <div class="box1  box-orange  ">
-             <div class="icon text-center"><i class="fa-solid fa-screwdriver"></i></div>
-            <div class="text-center">Mechanical Enginers</div>
-          </div>
-          <div class="box1 box-orange ">
-             <div class="icon text-center"><i class="fa-solid fa-couch"></i></div>
-            <div class="text-center">wood Work <br> Enginers</div>
-          </div>
-          <div class="box1 box-red">
-             <div class="icon text-center"><i class="fa-solid fa-shirt"></i></div>
-            <div class="text-center">Funitures</div>
-          </div>
-          
+            <div class="box1">
+                <div class="icon text-center"><i class="fa-solid fa-house-flood-water"></i></div>
+                <div class="text-center">Home Appliances</div>
+            </div>
+            <div class="box1">
+                <div class="icon text-center"><i class="fa-solid fa-bath"></i></div>
+                <div class="text-center">Plumbers</div>
+            </div>
+            <div class="box1">
+                <div class="icon text-center"><i class="fa-solid fa-mobile"></i></div>
+                <div class="text-center">ICT</div>
+            </div>
+            <div class="box1 box-orange">
+                <div class="icon text-center"><i class="fa-solid fa-plug"></i></div>
+                <div class="text-center">Electrical Engineers</div>
+            </div>
+            <div class="box1 box-orange">
+                <div class="icon text-center"><i class="fa-solid fa-screwdriver"></i></div>
+                <div class="text-center">Mechanical Engineers</div>
+            </div>
+            <div class="box1 box-orange">
+                <div class="icon text-center"><i class="fa-solid fa-couch"></i></div>
+                <div class="text-center">Wood Work<br>Engineers</div>
+            </div>
+            <div class="box1 box-red">
+                <div class="icon text-center"><i class="fa-solid fa-shirt"></i></div>
+                <div class="text-center">Furniture</div>
+            </div>
         </div>
+    </div>
 
-      </div>
-     
-    
-      <section class="container">
+    <section class="container">
         <div class="top-provider">
             <div class="text-center">
-                <h4>Top provider near you</h4>
+                <p class="eyebrow text-center">Highly rated</p>
+                <h4>Top providers near you</h4>
             </div>
-            <div class="provider-box">
-                <div class="wrap-boxes">
-                    <% if (vendors && vendors.length > 0) { %>
-                        <% vendors.forEach(vendor => { %>
-                            <% 
-                            const vendorId = vendor._id.toString(); 
-                            const rating = vendorRatings[vendorId] || 0; 
-                            %>
-                            <div class="box-content">
-                                <div class="star-icon text-center">
-                                    <% 
-                                    const solidStars = Math.min(rating, 3); // Maximum 3 solid stars
-                                    const emptyStars = Math.max(0, 5 - solidStars); // Remaining are empty stars
-                                    for (let i = 0; i < solidStars; i++) { %>
-                                        <i class="fa-solid fa-star"></i>
-                                    <% }
-                                    for (let i = 0; i < emptyStars; i++) { %>
-                                        <i class="fa-regular fa-star"></i>
-                                    <% } %>
-                                </div>
-                                <div class="image-div text-center">
-                                    <% if (vendor.profileImage && vendor.imageType) { %>
-                                        <img src="data:<%= vendor.imageType %>;base64,<%= vendor.profileImage %>" alt="Profile Image">
-                                    <% } else { %>
-                                        <p>No image available</p>
-                                    <% } %>
-                                </div>
-                                <div class="image-txt text-center">
-                                    <p><%= vendor.userRef.fName %> <%= vendor.userRef.lName %></p>
-                                    <p><%= vendor.userRefs.job_title %></p>
-                                    <p><%= vendor.userRefs.address %>from  funai</p>
-                                    <button class="book">
-                                        <a href="/clients/book/vendor/page?id=<%= vendor._id %>&userId=<%= user._id %>">Book Now</a>
-                                    </button>
-                                </div>
-                            </div>
-                        <% }) %>
+            <div class="provider-box wrap-boxes">
+
+                <!-- Populated dynamically; placeholder card structure kept below for reference -->
+                <!-- <div class="box-content placeholder-card" aria-hidden="true">
+                    <div class="image-div text-center">
+                        <img src="/images/avatar-placeholder.png" alt="" onerror="this.style.visibility='hidden'">
+                    </div>
+                    <div class="star-icon text-center">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="text-center provider-name">Vendor Name</div>
+                    <div class="text-center provider-trade">Trade / Specialty</div>
+                    <div class="image-txt text-center">
+                        <span class="book"><a href="#">Book Now</a></span>
+                    </div>
+                </div> -->
+                
+
+                <% if (vendors && vendors.length > 0) { %>
+    <% vendors.forEach(function(vendor) { %>
+        <div class="box-content">
+            <div class="image-div text-center">
+                <% if (vendor.profileImage && vendor.imageType) { %>
+                    <img src="data:<%= vendor.imageType %>;base64,<%= vendor.profileImage %>" alt="<%= vendor.userRef.fName %>">
+                <% } else { %>
+                    <img src="/images/avatar-placeholder.png" alt="" onerror="this.style.visibility='hidden'">
+                <% } %>
+            </div>
+            <div class="star-icon text-center">
+                <% var rating = (vendorRatings && vendorRatings[vendor._id]) ? vendorRatings[vendor._id] : 0; %>
+                <% for (var i = 1; i <= 5; i++) { %>
+                    <% if (i <= rating) { %>
+                        <i class="fa-solid fa-star"></i>
                     <% } else { %>
-                        <p>No verified vendors found.</p>
+                        <i class="fa-regular fa-star"></i>
                     <% } %>
-                </div>
+                <% } %>
+            </div>
+            <div class="text-center provider-name"><%= vendor.userRef.fName %> <%= vendor.userRef.lName %></div>
+            <div class="text-center provider-trade"><%= vendor.userRefs.job_title %></div>
+            <div class="image-txt text-center">
+                <span class="book"><a href="/clients/book/vendor/page?id=<%= vendor._id %>&userId=<%= user ? user._id : '' %>">Book Now</a></span>
+            </div>
+        </div>
+    <% }); %>
+<% } else { %>
+    <div class="box-content placeholder-card" aria-hidden="true">
+        <div class="image-div text-center">
+            <img src="/images/avatar-placeholder.png" alt="" onerror="this.style.visibility='hidden'">
+        </div>
+        <div class="star-icon text-center">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+        </div>
+        <div class="text-center provider-name">Vendor Name</div>
+        <div class="text-center provider-trade">Trade / Specialty</div>
+        <div class="image-txt text-center">
+            <span class="book"><a href="#">Book Now</a></span>
+        </div>
+    </div>
+<% } %>
+
             </div>
         </div>
     </section>
-    
-    
-    
-    
-    
-    
-    
 
-      <div class="container text-center sell" >
-        <img src="./images/reg.jpg" alt="">
-      </div>
-      <article class="container" >
-        <h5> Sell Service</h5>
+    <div class="container text-center sell">
+        <img src="/images/reg.jpg" alt="">
+    </div>
+
+    <article class="container sell-service">
+        <h5>Sell Your Service</h5>
         <div class="service-txt">
-          <p>you can sell your services here, register your Gig or experties and </p>
-          <div>get verified in our website here, and let do our job by connecting you</div>
-          <div> with  a teaming clients and  custormers of online profetional workers connect community</div>
+            <p>You can sell your services here — register your gig or expertise and</p>
+            <div>get verified on our website, and let us do the job of connecting you</div>
+            <div>with a growing community of clients and customers on Online Professional Workers Connect.</div>
         </div>
-        <button class="btn-div"><a href="/vendor/register/profession?id=<%= user._id %>">Register As Vendor </a></button>
-      </article>
-      <section class="summary">
+        <% if (user && user._id) { %>
+            <button class="btn-div"><a href="/vendor/register/profession?id=<%= user._id %>">Register As Vendor</a></button>
+        <% } else { %>
+            <button class="btn-div"><a href="/login">Register As Vendor</a></button>
+        <% } %>
+    </article>
+
+    <section class="summary">
         <div class="container">
             <div class="cont">
-              
                 <div class="about-summary ab-sum">
                     <h6>About Us</h6>
                     <ul>
-                        <li> <a href="#">Home</a></li>
-                        <li> <a href="#"> About Us</a></li>
-                        <li> <a href="#">Blog</a></li>
-                        <li> <a href="#"> Work With Us</a></li>
-                        <li> <a href="#"> Terms &  Conditions</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/careers">Work With Us</a></li>
+                        <li><a href="/terms">Terms &amp; Conditions</a></li>
                     </ul>
                 </div>
                 <div class="about-summary services">
                     <h6>Services</h6>
                     <ul>
-                        <li> <a href="#">Search Terms</a></li>
-                        <li> <a href="#"> Advance Search</a></li>
-                        <li> <a href="#">Privacy & Policy</a></li>
-                        <li> <a href="#"> Suport Us</a></li>
-                        <li> <a href="#"> Our Stores</a></li>
+                        <li><a href="#">Search Terms</a></li>
+                        <li><a href="#">Advance Search</a></li>
+                        <li><a href="/privacy">Privacy &amp; Policy</a></li>
+                        <li><a href="/support">Support Us</a></li>
+                        <li><a href="#">Our Stores</a></li>
                     </ul>
                 </div>
                 <div class="about-summary contact">
                     <h6>Contact Us</h6>
                     <ul>
-                        <li> <i class="fa-solid fa-phone"></i> <a href="#">+123 ikwo street</a></li>
-                        <li> <i class="fa-solid fa-envelope"></i><a href="#"> Suport@gmail.com</a></li>
-                        <li> <a href="#"> +123 customer Care </a></li>
-                        
+                        <li><i class="fa-solid fa-phone"></i> <a href="tel:+123">+123 Ikwo Street</a></li>
+                        <li><i class="fa-solid fa-envelope"></i> <a href="mailto:support@gmail.com">support@gmail.com</a></li>
+                        <li><i class="fa-solid fa-headset"></i> <a href="#">+123 Customer Care</a></li>
                     </ul>
                 </div>
             </div>
-        </div>  
-    
-    </section>
-    <section  class="footer">
-        <footer class="copy"> @copy right 2024 </footer>
-        <div class="footer-icon ">
-            <i class="fa-brands fa-facebook" id="footer-icon"></i>
-            <i class="fa-brands fa-twitter" id="footer-icon"></i>
-            <i class="fa-brands fa-instagram" id="footer-icon"></i>
         </div>
     </section>
-      
-      
 
+    <section class="footer">
+        <footer class="copy">&copy; 2024 ConnectPro. All rights reserved.</footer>
+        <div class="footer-icon">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </section>
 
+    <script>
+        window.addEventListener("load", function () {
+            typeWriter();
+        });
+        var i = 0;
+        var txt = "What are you buying today?";
+        var speed = 70;
+        function typeWriter() {
+            var el = document.getElementById("buy");
+            if (i < txt.length && el) {
+                el.innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+    </script>
 
-
-<script>
-  // let buy=document.getElementById("buy")
-  window.addEventListener("load",function(){
-typeWriter()
-  })
-  var i = 0;
-var txt = 'What are you buying today?';
-var speed = 100;
-  function typeWriter() {
-if (i < txt.length) {
-  document.getElementById("buy").innerHTML += txt.charAt(i);
-  i++;
-  setTimeout(typeWriter, speed);
-}
-}
-
-
-
-
-
-
-
-
-</script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script> -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-      <script src="/bootstrap/js/bootstrap.bundle.js"></script>
->>>>>>> ef55d82 (committing workers connect  first time)
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 </body>
 </html>

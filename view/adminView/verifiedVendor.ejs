@@ -110,37 +110,33 @@
     </form>
 
     <script>
-    document.querySelector('form').addEventListener('submit', async function(event) {
-        event.preventDefault();
+   
+document.querySelector('form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    const formData = new FormData(this);
 
-        const formData = new FormData(this);
+    try {
+        const response = await fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            redirect: 'manual' // don't silently follow the server's redirect — we want to know it happened
+        });
 
-        try {
-            const response = await fetch(this.action, {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (response.ok) {
-                alert("Vendor profile updated successfully.");
-                window.location.href = '/admin/vendors';
-            } else {
-                let errorMessage;
-                if (response.status === 400) {
-                    errorMessage = "Missing required fields. Please fill in all necessary information.";
-                } else if (response.status === 409) {
-                    errorMessage = "A vendor with this email already exists. Please use a different email.";
-                } else {
-                    errorMessage = "An error occurred while updating the vendor. Please try again later.";
-                }
-
-                alert(errorMessage);
-            }
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            alert('An unexpected error occurred. Please try again later.');
+        // type "opaqueredirect" means the server sent a 3xx and the browser refused to expose it to JS —
+        // that's actually a SUCCESS signal here, since adminVerifyvendor only redirects after saving
+        if (response.type === 'opaqueredirect' || response.ok) {
+            alert("Vendor profile updated successfully.");
+            window.location.href = '/admin/dashbord';
+            return;
         }
-    });
+
+        const text = await response.text();
+        alert(text || `Request failed with status ${response.status}`);
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('An unexpected error occurred. Please try again later.');
+    }
+});
 
     </script>
 

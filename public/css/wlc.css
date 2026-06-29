@@ -1,32 +1,406 @@
+/* ==========================================================================
+   ConnectHub — Carousel Design System
+   Tokens: deep navy ground, electric blue accent, amber CTA, crimson login
+   ========================================================================== */
+
 :root{
-    --body-bg: white;
-    --index-bg: rgba(127,252,212, 0.1) ;
-    --text-bg:orange;
-    --box1-bg:#b8860B;
-    --box2-bg:#DC143c;
+    --body-bg: #ffffff;
+
+    /* Brand tokens */
+    --navy-deep:      #0A1628;
+    --navy-panel:     #0F1F38;
+    --navy-panel-2:   #112341;
+    --blue-accent:    #3B82F6;
+    --blue-accent-2:  #60A5FA;
+    --ink-0:          #F8FAFC;
+    --ink-1:          #C9D3E0;
+    --line-soft:      rgba(255,255,255,0.10);
+
+    --box1-bg: #B8860B;   /* register / next — amber */
+    --box1-hover: #d49a14;
+    --box2-bg: #DC143C;   /* login — crimson outline style */
+
+    --index-bg: rgba(127,252,212,0.1);
+    --text-bg: orange;
+
+    --radius-md: 10px;
+    --radius-lg: 18px;
+
+    --font-display: "Sora", "Segoe UI", system-ui, sans-serif;
+    --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
 }
 
+*{ box-sizing: border-box; }
 
-.slide .next-btn{
-    padding: 5px;
-    width: 5%;
-    background-color: #b8860B;
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--body-bg);
+    font-family: var(--font-body);
+    color: var(--ink-0);
+}
+
+/* ==========================================================================
+   Carousel shell
+   ========================================================================== */
+
+.wlc-carousel{
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.wlc-carousel .carousel-inner{
+    border-radius: 0;
+    height: 100%;
+}
+
+.wlc-carousel .carousel-item{
+    height: 100%;
+}
+
+/* ==========================================================================
+   Slide frame: media (left) + panel (right) on desktop,
+   stacked on small screens
+   ========================================================================== */
+
+.slide-frame{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: var(--navy-deep);
+}
+
+.slide-media{
+    position: relative;
+    flex: 0 0 46%;
+    max-width: 46%;
+    overflow: hidden;
+}
+
+.slide-media img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* fade where photo meets panel, for a seamless blend */
+.media-fade{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(10,22,40,0) 55%, var(--navy-deep) 100%);
+    pointer-events: none;
+}
+
+.slide-panel{
+    position: relative;
+    flex: 1;
+    background: linear-gradient(160deg, var(--navy-panel) 0%, var(--navy-panel-2) 60%, var(--navy-deep) 100%);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   Node-mesh signature graphic — faint, ambient, drifting
+   ========================================================================== */
+
+.node-mesh{
+    position: absolute;
+    inset: 0;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.node-mesh svg{
+    width: 100%;
+    height: 100%;
+}
+
+.mesh-line{
+    stroke: var(--blue-accent-2);
+    stroke-width: 1;
+    opacity: 0.25;
+}
+
+.mesh-node{
+    fill: var(--blue-accent-2);
+    opacity: 0.55;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: mesh-pulse 4.5s ease-in-out infinite;
+}
+
+.mesh-node:nth-of-type(2){ animation-delay: -0.8s; }
+.mesh-node:nth-of-type(3){ animation-delay: -1.6s; }
+.mesh-node:nth-of-type(4){ animation-delay: -2.4s; }
+.mesh-node:nth-of-type(5){ animation-delay: -3.2s; }
+
+@keyframes mesh-pulse{
+    0%, 100%{ opacity: 0.35; transform: scale(1); }
+    50%{ opacity: 0.85; transform: scale(1.3); }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .mesh-node{ animation: none; }
+}
+
+/* ==========================================================================
+   Panel content
+   ========================================================================== */
+
+.panel-content{
+    position: relative;
+    z-index: 2;
+    padding: 2.75rem 3rem;
+    max-width: 480px;
+}
+
+.eyebrow{
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue-accent-2);
+    margin: 0 0 0.85rem;
+}
+
+.slide-title{
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 1.1rem + 1.3vw, 2.35rem);
+    line-height: 1.18;
+    color: var(--ink-0);
+    margin: 0 0 0.9rem;
+    letter-spacing: -0.01em;
+}
+
+.slide-title .accent{
+    color: var(--blue-accent-2);
+    background: linear-gradient(90deg, var(--blue-accent-2), #93C5FD);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.slide-copy{
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--ink-1);
+    margin: 0 0 1.6rem;
+    max-width: 36ch;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.wrap-btn{
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.slide .next-btn,
+.slide-panel .next-btn{
+    padding: 0.65rem 1.6rem;
+    width: auto;
+    min-width: 110px;
+    background-color: var(--box1-bg);
+    border: 1px solid transparent;
     color: white;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.88rem;
+    letter-spacing: 0.01em;
+    border-radius: var(--radius-md);
     outline: none;
-  box-sizing: border-box;
-
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
+
+.slide .next-btn:hover{
+    background-color: var(--box1-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -8px rgba(184,134,11,0.55);
+}
+
+.slide .next-btn:active{ transform: translateY(0); }
+
 .slide .reg-btn{
-padding: 5px;
-background-color: var(--box1-bg);
-width: 20%;
-color: white;
-
+    padding: 0.7rem 1.9rem;
+    background-color: var(--blue-accent);
+    width: auto;
+    min-width: 180px;
+    color: white;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.92rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
-.slide .log-btn{
-padding: 5px;
-background-color:var(--box2-bg);
-width: 10%;
-color: white;
 
+.slide .reg-btn:hover{
+    background-color: #2563EB;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px -10px rgba(59,130,246,0.6);
+}
+
+.slide .log-btn{
+    padding: 0.7rem 1.9rem;
+    background-color: transparent;
+    width: auto;
+    min-width: 180px;
+    color: var(--ink-0);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.92rem;
+    border: 1.5px solid var(--box2-bg);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.slide .log-btn:hover{
+    background-color: rgba(220,20,60,0.12);
+    transform: translateY(-1px);
+}
+
+.reg-link, .log-link{
+    text-decoration: none;
+    display: inline-block;
+}
+
+.or-divider{
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--ink-1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: left;
+}
+
+/* third slide: stack reg/login vertically like the reference */
+.carousel-item:nth-child(3) .wrap-btn{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+}
+
+/* ==========================================================================
+   Carousel controls & indicators — restyled to sit on dark media
+   ========================================================================== */
+
+.wlc-carousel .carousel-control-prev,
+.wlc-carousel .carousel-control-next{
+    width: 6%;
+    opacity: 0.85;
+}
+
+.wlc-carousel .carousel-control-prev-icon,
+.wlc-carousel .carousel-control-next-icon{
+    width: 1.75rem;
+    height: 1.75rem;
+    background-color: rgba(10,22,40,0.45);
+    border-radius: 50%;
+    padding: 0.4rem;
+    background-size: 60% 60%;
+    backdrop-filter: blur(2px);
+}
+
+.wlc-carousel .carousel-indicators{
+    bottom: 0.9rem;
+    margin-bottom: 0;
+}
+
+.wlc-carousel .carousel-indicators [data-bs-target]{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255,255,255,0.35);
+    opacity: 1;
+    margin: 0 5px;
+    transition: background-color 0.2s ease, width 0.2s ease;
+}
+
+.wlc-carousel .carousel-indicators .active{
+    background-color: var(--blue-accent-2);
+    width: 22px;
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   Responsive breakpoints
+   ========================================================================== */
+
+/* Tablet */
+@media (max-width: 991.98px){
+    .panel-content{ padding: 2.25rem 2rem; max-width: 100%; }
+    .slide-title{ font-size: clamp(1.3rem, 1rem + 1.6vw, 1.9rem); }
+    .slide-copy{ max-width: 32ch; }
+}
+
+/* Mobile: stack media above panel, both filling the full-height frame */
+@media (max-width: 767.98px){
+    .slide-frame{
+        flex-direction: column;
+    }
+    .slide-media{
+        flex: 0 0 38%;
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        max-height: none;
+    }
+    .slide-media img{
+        height: 100%;
+    }
+    .media-fade{
+        background: linear-gradient(180deg, rgba(10,22,40,0) 55%, var(--navy-deep) 100%);
+    }
+    .slide-panel{
+        flex: 1 1 auto;
+        padding: 0;
+        overflow-y: auto;
+    }
+    .panel-content{
+        padding: 1.6rem 1.4rem 2.4rem;
+    }
+    .slide-title{ font-size: 1.35rem; }
+    .slide-copy{ font-size: 0.92rem; max-width: 100%; }
+    .wlc-carousel .carousel-indicators{ bottom: 0.6rem; }
+}
+
+@media (max-width: 575.98px){
+    .panel-content{ padding: 1.3rem 1.1rem 2.1rem; }
+    .slide .reg-btn,
+    .slide .log-btn{ width: 100%; min-width: 0; }
+    .carousel-item:nth-child(3) .wrap-btn{ width: 100%; }
+    .wlc-carousel .carousel-control-prev,
+    .wlc-carousel .carousel-control-next{
+        width: 15%;
+        height: 38%;
+        top: 0;
+        bottom: auto;
+    }
+}
+
+/* Small phones */
+@media (max-width: 380px){
+    .slide-title{ font-size: 1.18rem; }
+    .panel-content{ padding: 1.1rem 0.9rem 1.9rem; }
 }

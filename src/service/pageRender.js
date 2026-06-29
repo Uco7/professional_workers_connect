@@ -1,8 +1,37 @@
 const VerifiedVendor = require("../model/veryfiedVendor");
+const User=require("../model/userModel")
 
 module.exports={
     homePage:async(req,res)=>{
         res.render("welcomePage")
+    },
+   indexPagePage:async(req,res)=>{
+     try {
+        const loginUser=req.user
+        console.log("loged in user",loginUser)
+        const findUser=await User.findById(loginUser._id)
+        if(!findUser)return console.log("user not found")
+            console.log("user logging in",findUser)
+          // Fetch verified vendors
+            const response = await fetch(`http://localhost:3000/admin/find/verified/vendor`);
+            const verifiedVendors = await response.json();
+            console.log("verfied vevdor",verifiedVendors)
+            console.log("vendor count:", verifiedVendors?.vendors?.length);
+console.log("first vendor image length:", verifiedVendors?.vendors?.[0]?.profileImage?.length);
+console.log("first vendor imageType:", verifiedVendors?.vendors?.[0]?.imageType);
+        
+        res.render("index",{user:findUser,
+            verifiedVendors
+
+
+        })
+     } catch (error) {
+        console.log("error",error)
+        res.status(500).json({
+            message:error.message
+        })
+        
+     }
     },
     vendorUploadedWorkPage:async(req,res)=>{
         

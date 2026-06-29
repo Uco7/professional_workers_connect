@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-const postRoute=require("express").Router()
-const actorsAuthcont=require("../controller/actorsAuthCont")
-const upload=require("../helperMildleWare/imageUpload")
-postRoute.post("/register",upload.single("profileImage"),actorsAuthcont.registerActors)
-postRoute.post("/login",actorsAuthcont.login)
-module.exports=postRoute
-=======
+
 const postRoute=require("express").Router();
 const usersAuthCont=require("../controller/authCont")
 const crudauthcont=require("../controller/crudeCont")
@@ -21,4 +14,3 @@ const upload=require("../helperMildware/imageuploadMildware")
  postRoute.delete('/admin/delete/reg/profession/:id',crudauthcont.deleteRegVendor)
  postRoute.delete('/admin/delete/booked/vendor/:id',crudauthcont.deleteBookedVendor)
 module.exports=postRoute  
->>>>>>> ef55d82 (committing workers connect  first time)

@@ -1,10 +1,5 @@
 {
   "dependencies": {
-    "@paystack/inline-js": "^2.20.0",
-<<<<<<< HEAD
-=======
-    "axios": "^1.7.3",
->>>>>>> ef55d82 (committing workers connect  first time)
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
@@ -13,7 +8,7 @@
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
-    "express": "^4.19.2",
+    "express": "^4.22.1",
     "express-session": "^1.18.0",
     "expresss": "^0.0.0",
     "jquery": "^3.7.1",

@@ -94,12 +94,13 @@ module.exports={
                     gender,
                 });
         
-                if (newUser) {
-                    console.log("User created successfully", newUser);
-                    res.redirect("/user/login/page");
-                } else {
-                    console.log("Registration failed");
+                if (!newUser) {
+                    console.log(" Registration failed ");
+                 return   res.redirect("/user/login/page");
                 }
+             
+                    console.log("User created successfully", newUser);
+           
         
             } catch (error) {
                 console.log(error);
@@ -124,7 +125,7 @@ module.exports={
                 bio,
                 userId // Added for user lookup
             } = req.body;
-            console.log("user id",userId);
+            console.log(" profession user id",userId);
             
     
             // Handle profile image
@@ -193,54 +194,89 @@ module.exports={
             });
         }
     },
-    adminVerifyvendor: async (req, res) => {
-        try {
-            const vendorId = req.params.id;
+    // adminVerifyvendor: async (req, res) => {
+    //     try {
+    //         const vendorId = req.params.id;
     
-            // Extract fields from the form data
-            const {
-                verification_status,
-                userId
-            } = req.body;
+    //         // Extract fields from the form data
+    //         const {
+    //             verification_status,
+    //             userId
+    //         } = req.body;
     
-            // Extract profile image and image type from the form data if uploaded
-            const profileImage = req.file ? req.file.buffer.toString('base64') : req.body.profileImage;
-            const imageType = req.file ? req.file.mimetype : req.body.imageType;
+    //         // Extract profile image and image type from the form data if uploaded
+    //         const profileImage = req.file ? req.file.buffer.toString('base64') : req.body.profileImage;
+    //         const imageType = req.file ? req.file.mimetype : req.body.imageType;
     
-            // Find the user in the UserProfession collection by ID
-            const vendor = await Profession.findById(vendorId);
+    //         // Find the user in the UserProfession collection by ID
+    //         const vendor = await Profession.findById(vendorId);
     
-            if (!vendor) {
-                return res.status(404).send('vendor not found');
-            }
-            const user = await User.findById(userId);
+    //         if (!vendor) {
+    //             return res.status(404).send('vendor not found');
+    //         }
+    //         const user = await User.findById(userId);
     
-            if (!user) {
-                return res.status(404).send('User not found');
-            }
+    //         if (!user) {
+    //             return res.status(404).send('User not found');
+    //         }
     
-            // Create a new vendor record in the VerifiedVendor collection
-            const newVendor = new VerifiedVendor({
-                userRefs: vendorId, // Reference to the userProfession document
-                userRef: userId, // Reference to the userProfession document
-                verification_status: verification_status || 'Pending', // Default to 'Pending' if not provided
-                profileImage: profileImage || user.profileImage, // Use the existing image if not updated
-                imageType: imageType || user.imageType // Use the existing image type if not updated
-                // Include other fields if necessary
-            });
+    //         // Create a new vendor record in the VerifiedVendor collection
+    //         const newVendor = new VerifiedVendor({
+    //             userRefs: vendorId, // Reference to the userProfession document
+    //             userRef: userId, // Reference to the userProfession document
+    //             verification_status: verification_status || 'Pending', // Default to 'Pending' if not provided
+    //             profileImage: profileImage || user.profileImage, // Use the existing image if not updated
+    //             imageType: imageType || user.imageType // Use the existing image type if not updated
+    //             // Include other fields if necessary
+    //         });
     
-            // Save the new vendor record to the database
-            await newVendor.save();
+    //         // Save the new vendor record to the database
+    //         await newVendor.save();
     
-            // Redirect to vendors list or a success page
-            res.redirect('/admin/vendors');
-        } catch (error) {
-            console.error('Error creating vendor:', error);
-            res.status(500).send('An error occurred while creating the vendor. Please try again later.');
-        }
-    },
+    //         // Redirect to vendors list or a success page
+    //         res.redirect('/admin/vendors');
+    //     } catch (error) {
+    //         console.error('Error creating vendor:', error);
+    //         res.status(500).send('An error occurred while creating the vendor. Please try again later.');
+    //     }
+    // },
     
         
+adminVerifyvendor: async (req, res) => {
+    try {
+        const vendorId = req.params.id;
+        const { verification_status, userId } = req.body;
+
+        const profileImage = req.file ? req.file.buffer.toString('base64') : req.body.profileImage;
+        const imageType = req.file ? req.file.mimetype : req.body.imageType;
+
+        const vendor = await Profession.findById(vendorId);
+        if (!vendor) {
+            return res.status(404).send('vendor not found');
+        }
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        const newVendor = new VerifiedVendor({
+            userRefs: vendorId,
+            userRef: userId,
+            verification_status: verification_status || 'Pending',
+            profileImage: profileImage || user.profileImage,
+            imageType: imageType || user.imageType
+        });
+
+        await newVendor.save();
+
+        res.redirect('/admin/dashbord'); // was '/admin/vendors' — that route doesn't exist
+    } catch (error) {
+        console.error('Error creating vendor:', error);
+        res.status(500).send('An error occurred while creating the vendor. Please try again later.');
+    }
+},
+
+
         login: async (req, res) => {
             try {
                 const { email, password, role } = req.body;
@@ -279,6 +315,7 @@ module.exports={
                     const token = genUserToken(loginUser._id);
                     req.session.token = token;
                     req.session.loginUserId = loginUser._id;
+                    console.log("req user id",)
         
                     return res.redirect('/index/page');
         

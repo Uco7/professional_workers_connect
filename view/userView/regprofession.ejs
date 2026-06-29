@@ -9,22 +9,19 @@
     <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <section class="container ">
+    <section class="container">
         <article class="skill-intro">
             <div class="wrap-intro-txt text-center">
-                <h2 id="buy" style="padding: 5px;"> <%= user ? user.fName : 'User' %> </h2>
-
+                <h2 id="buy" style="padding: 5px;"></h2>
             </div>
             <div class="intro text-center">
-                <div class="text-center">Join now   to  showcase your skills on  our site and become visible, thus increasing  your chances 
-                    <br> of getting  engageg with clients in needs of your experties
-
+                <div class="text-center">Join now to showcase your skills on our site and become visible, thus increasing your chances
+                    <br> of getting engaged with clients in need of your expertise
                 </div>
-            
             </div>
-
         </article>
     </section>
+
     <section class="container image-info">
         <div class="wlc-img text-center">
             <img src="/images/reg.jpg" alt="">
@@ -32,73 +29,84 @@
         <div class="btn-div text-center">
             <button class="join">Join Now</button>
         </div>
-        
     </section>
+
     <hr>
+
     <div class="container mt-5" id="cont">
-        <h2 class="text-center mb-4" style="color: ;">Registration Form</h2>
-        <form   enctype="multipart/form-data"  id="registerForm">
-          
+
+        <% if (!user || !user._id) { %>
+            <div class="alert alert-warning text-center" role="alert">
+                You need to be logged in to register a profession.
+                <a href="/login">Log in here</a> to continue.
+            </div>
+        <% } else { %>
+
+        <h2 class="text-center mb-4">Registration Form</h2>
+        <form enctype="multipart/form-data" id="registerForm">
+
             <div class="container">
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="first_name" class="form-label">First Name:</label>
-                        <input type="text" class="form-control" id="first_name" name="fName" disabled value="<%= user ? user.fName : 'User' %>">
+                        <input type="text" class="form-control" id="first_name" name="fName" disabled value="<%= user.fName %>">
                     </div>
                     <div class="col-md-6">
                         <label for="last_name" class="form-label">Last Name:</label>
-                        <input type="text" class="form-control" id="last_name" name="lName" disabled value="<%= user ? user.lName : 'User' %>">
+                        <input type="text" class="form-control" id="last_name" name="lName" disabled value="<%= user.lName %>">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" disabled value="<%= user ? user.email : 'User' %>">
+                        <input type="email" class="form-control" id="email" name="email" disabled value="<%= user.email %>">
                     </div>
                     <div class="col-md-6">
                         <label for="phone_no" class="form-label">Phone Number:</label>
-                        <input type="text" class="form-control" id="phone_no" name="phone_no" disabled value="<%= user ? user.phone_no: 'User' %>">
+                        <input type="text" class="form-control" id="phone_no" name="phone_no" disabled value="<%= user.phone_no %>">
                     </div>
                 </div>
             </div>
-            
-                <hr>
-             <div class="p-detail text-center">
-                <h6>   *Personal Details</h6>
-             </div>
-               
-             <div class="row mb-3">
+
+            <hr>
+            <div class="p-detail text-center">
+                <h6>*Personal Details</h6>
+            </div>
+
+            <div class="row mb-3">
                 <div class="col-md-4">
-                    <label for="password" class="form-label">Office Address/address:</label>
+                    <label for="address" class="form-label">Office Address/Address:</label>
                     <input type="text" class="form-control" id="address" name="address" required>
-                    <input type="hidden" name="userId" value="<%= user?user._id:"no id" %>">
+                    <!--
+                        The server should identify the logged-in user from session/JWT
+                        (e.g. req.user._id from auth middleware), not from a value the
+                        browser submits. A hidden field can be edited by anyone before
+                        submit, so it must never be trusted as the source of identity.
+                        It's kept here only as a fallback for routes that still read
+                        req.body.userId, and is only rendered when a real id exists.
+                    -->
+                    <input type="hidden" name="userId" value="<%= user._id %>">
                     <span id="addressError" class="error-message"></span>
-
-
-                
                 </div>
                 <div class="col-md-4">
                     <label for="job" class="form-label">Job Title:</label>
-                    <input type="text" class="form-control" id="job"  name="job_title">
+                    <input type="text" class="form-control" id="job" name="job_title">
                     <span id="jobTitleError" class="error-message"></span>
-
-                    
                 </div>
                 <div class="col-md-4">
-                    <label for="qualification" class="form-label">Years of Experience:</label>
-                    <select class="form-select" id="gender" name="Years_of_experience" required>
-                        <option value=""> your years  of experience</option>
-                        
+                    <label for="experience" class="form-label">Years of Experience:</label>
+                    <select class="form-select" id="experience" name="Years_of_experience" required>
+                        <option value="">your years of experience</option>
                         <option value="1-2 years">1-2 years</option>
-                        <option value="3-4 years">3-4 yearsr</option>
+                        <option value="3-4 years">3-4 years</option>
                         <option value="5 years">5 years</option>
                     </select>
                 </div>
-                
+
                 <div class="col-md-4">
-                    <label for="qualification" class="form-label">Heighest Qaulification:</label>
-                    <select class="form-select" id="gender" name="qualification" required>
-                        <option value="">choose Heighest qualification</option>
+                    <label for="qualification" class="form-label">Highest Qualification:</label>
+                    <select class="form-select" id="qualification" name="qualification" required>
+                        <option value="">choose highest qualification</option>
                         <option value="Skilled Trained">Skilled Trained</option>
                         <option value="WEAC/NECO/GCE/NABTEP">WEAC/NECO/GCE/NABTEP</option>
                         <option value="OND/HND">OND/HND</option>
@@ -106,28 +114,21 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label for="skill/tools" class="form-label">Skills/Tools:</label>
+                    <label for="tool" class="form-label">Skills/Tools:</label>
                     <input type="text" class="form-control" id="tool" name="skills_tools" required>
                     <span id="skillsToolsError" class="error-message"></span>
-
                 </div>
                 <div class="col-md-4">
-                    
-                    <textarea name="bio" id="bio" rows="5" cols="60" style=" font-size: small;" placeholder="BIO(Briefly describe your self and professional background)"> </textarea>
+                    <label for="bio" class="form-label">Bio:</label>
+                    <textarea class="form-control" name="bio" id="bio" rows="5" placeholder="Briefly describe yourself and your professional background"></textarea>
                     <span id="bioError" class="error-message"></span>
-
                 </div>
             </div>
-            
-            
-            
-            
-            
+
             <div class="row mb-3">
-                
                 <div class="col-md-4">
                     <label for="date_of_birth" class="form-label">Date of Birth:</label>
-                    <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required >
+                    <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required>
                 </div>
                 <div class="col-md-4">
                     <label for="state_of_origin" class="form-label">State of Origin:</label>
@@ -137,196 +138,167 @@
                 <div class="col-md-4">
                     <label for="LGA" class="form-label">Local Government Area:</label>
                     <input type="text" class="form-control" id="LGA" name="LGA" required>
+                    <span id="lgaError" class="error-message"></span>
                 </div>
-               
                 <div class="col-md-4">
                     <label for="profile_image" class="form-label">Upload Passport:</label>
                     <input type="file" class="form-control" id="profile_image" name="profileImage" accept="image/*" required>
-                
-                
                 </div>
-              
             </div>
+
             <hr>
             <div class="submit-txt">
-                <p>By submitting this form , you  agree to the terms and conditions of this site</p>
-                <p>Our team will review  your submition , and upon approval , you will become vissible  on  the onlin professional workers connect</p>
+                <p>By submitting this form, you agree to the terms and conditions of this site.</p>
+                <p>Our team will review your submission, and upon approval, you will become visible on the online professional workers connect platform.</p>
             </div>
-        
+
             <div class="text-center">
-                <button type="submit" class="btn ">Submit For Review</button>
+                <button type="submit" class="btn">Submit For Review</button>
             </div>
         </form>
+
+        <% } %>
     </div>
-    <!-- <script>
-    
 
-
-
-
-
-
-
-    </script> -->
-   
     <script>
-       document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('registerForm');
 
-            form.addEventListener('submit', async function(event) {
-                event.preventDefault();
+            if (form) {
+                form.addEventListener('submit', async function (event) {
+                    event.preventDefault();
 
-                const formData = new FormData(form);
-                let isValid = true;
-                const addressRegex = /^[A-Za-z0-9\s.,#'-]+$/;
-            const stateRegex = /^[A-Za-z\s.'-]+$/;
-            const lgaRegex = /^[A-Za-z\s\-'’]+$/;
-            const jobTitleRegex = /^[A-Za-z\s.,'-]+$/;
-           
-            const skillsToolsRegex = /^[A-Za-z0-9\s.,'!@#$%^&*()_+=[\]{}|;:<>?-]+$/;
-            const bioRegex = /^[A-Za-z0-9\s.,'!@#$%^&*()_+=[\]{}|;:<>?-]{10,}$/; // Minimum 10 characters
-    
+                    const formData = new FormData(form);
+                    let isValid = true;
+                    const addressRegex = /^[A-Za-z0-9\s.,#'-]+$/;
+                    const stateRegex = /^[A-Za-z\s.'-]+$/;
+                    const lgaRegex = /^[A-Za-z\s\-'’]+$/;
+                    const jobTitleRegex = /^[A-Za-z\s.,'-]+$/;
+                    const skillsToolsRegex = /^[A-Za-z0-9\s.,'!@#$%^&*()_+=[\]{}|;:<>?-]+$/;
+                    const bioRegex = /^[A-Za-z0-9\s.,'!@#$%^&*()_+=[\]{}|;:<>?-]{10,}$/;
 
-                // Address validation
-                const address = document.getElementById('address').value;
-                const addressError = document.getElementById('addressError');
-                if (addressError) {
-                    
-                    if (!addressRegex.test(address)) {
-                        addressError.innerHTML = 'Invalid address format';
-                        addressError.style.color="red";
-                        isValid = false;
-                    } else {
-                        addressError.textContent = '';
+                    const address = document.getElementById('address').value;
+                    const addressError = document.getElementById('addressError');
+                    if (addressError) {
+                        if (!addressRegex.test(address)) {
+                            addressError.textContent = 'Invalid address format';
+                            addressError.style.color = 'red';
+                            isValid = false;
+                        } else {
+                            addressError.textContent = '';
+                        }
                     }
-                }
 
-                // Additional validation checks
-                const state = document.getElementById('state_of_origin').value;
-                const stateError = document.getElementById('stateError');
-                if (stateError) {
-                    if (!stateRegex.test(state))  { 
-
-                        stateError.innerHTML = 'State of Origin is required and should include any of the alphabet';
-                        stateError.style.color="red"
-                        isValid = false;
-                    } else {
-                        stateError.textContent = '';
+                    const state = document.getElementById('state_of_origin').value;
+                    const stateError = document.getElementById('stateError');
+                    if (stateError) {
+                        if (!stateRegex.test(state)) {
+                            stateError.textContent = 'State of Origin is required and should include letters only';
+                            stateError.style.color = 'red';
+                            isValid = false;
+                        } else {
+                            stateError.textContent = '';
+                        }
                     }
-                }
 
-                const lga = document.getElementById('LGA').value;
-                const lgaError = document.getElementById('lgaError');
-                if (lgaError) {
-                    if (!lgaRegex.test(lga)){ 
-
-                        lgaError.innerHTML = 'LGA is required, and should include any of the alphabet';
-                        lgaError.style.color="red"
-                        isValid = false;
-                    } else {
-                        lgaError.textContent = '';
+                    const lga = document.getElementById('LGA').value;
+                    const lgaError = document.getElementById('lgaError');
+                    if (lgaError) {
+                        if (!lgaRegex.test(lga)) {
+                            lgaError.textContent = 'LGA is required, and should include letters only';
+                            lgaError.style.color = 'red';
+                            isValid = false;
+                        } else {
+                            lgaError.textContent = '';
+                        }
                     }
-                }
 
-                const jobTitle = document.getElementById('job').value;
-                const jobTitleError = document.getElementById('jobTitleError');
-                if (jobTitleError) {
-                    if (!jobTitleRegex.test(jobTitle )) {  
-
-                        jobTitleError.innerHTML = 'Job Title is required, and should include any of the alphbet';
-                        jobTitleError.style.color="red"
-                        isValid = false;
-                    } else {
-                        jobTitleError.textContent = '';
+                    const jobTitle = document.getElementById('job').value;
+                    const jobTitleError = document.getElementById('jobTitleError');
+                    if (jobTitleError) {
+                        if (!jobTitleRegex.test(jobTitle)) {
+                            jobTitleError.textContent = 'Job Title is required, and should include letters';
+                            jobTitleError.style.color = 'red';
+                            isValid = false;
+                        } else {
+                            jobTitleError.textContent = '';
+                        }
                     }
-                }
 
-                const skillsTools = document.getElementById('tool').value;
-                const skillsToolsError = document.getElementById('skillsToolsError');
-                if (skillsToolsError) {
-                    if (!skillsToolsRegex.test( skillsTools)) { 
-
-
-                        skillsToolsError.innerHTML = 'Skills/Tools are required, and should include any of the alphabet';
-                        skillsToolsError.style.color="red"
-                        isValid = false;
-                    } else {
-                        skillsToolsError.textContent = '';
+                    const skillsTools = document.getElementById('tool').value;
+                    const skillsToolsError = document.getElementById('skillsToolsError');
+                    if (skillsToolsError) {
+                        if (!skillsToolsRegex.test(skillsTools)) {
+                            skillsToolsError.textContent = 'Skills/Tools are required';
+                            skillsToolsError.style.color = 'red';
+                            isValid = false;
+                        } else {
+                            skillsToolsError.textContent = '';
+                        }
                     }
-                }
 
-                const bio = document.getElementById('bio').value;
-                const bioError = document.getElementById('bioError');
-                if (bioError) {
-                    if (!bioRegex.test(bio)) { 
-                        bioError.innerHTML = 'Bio is required.';
-                        bioError.style.color="red";
-                        isValid = false;
-                    } else {
-                        bioError.textContent = '';
+                    const bio = document.getElementById('bio').value;
+                    const bioError = document.getElementById('bioError');
+                    if (bioError) {
+                        if (!bioRegex.test(bio)) {
+                            bioError.textContent = 'Bio is required (minimum 10 characters).';
+                            bioError.style.color = 'red';
+                            isValid = false;
+                        } else {
+                            bioError.textContent = '';
+                        }
                     }
-                }
 
-                if (!isValid) return;
+                    if (!isValid) return;
 
-                try {
-                    const response = await fetch(`/register/profession`, {
-                        method: 'POST',
-                        body: formData
-                    });
+                    try {
+                        const response = await fetch('/register/profession', {
+                            method: 'POST',
+                            body: formData
+                        });
 
-                    const result = await response.json();
-                    if (response.ok) {
-                        alert(result.message);
-                    } else {
-                        alert(result.message || 'Registration failed');
+                        const result = await response.json();
+                        if (response.ok) {
+                            alert(result.message);
+                        } else {
+                            alert(result.message || 'Registration failed');
+                        }
+                    } catch (error) {
+                        console.error(error);
+                        alert('An error occurred. Please try again.');
                     }
-                } catch (error) {
-                    console.error(error);
-                    alert('An error occurred. Please try again.');
-                }
-            });
-
-            const joinBtn = document.querySelector(".join");
-        const imageSection = document.querySelector(".image-info");
-        const contSection = document.querySelector("#cont");
-        
-        joinBtn.addEventListener("click", function() {
-            imageSection.style.display = "none";
-            contSection.style.display = "block";
-        });
-            // Typewriter effect
-            const typewriter = document.getElementById('typewriter');
-            const text = "Welcome to the Profession Registration Page!";
-            let index = 0;
-
-            function type() {
-                if (index < text.length) {
-                    typewriter.textContent += text.charAt(index);
-                    index++;
-                    setTimeout(type, 100); // Adjust typing speed
-                }
+                });
             }
 
-            type();
-        });
-        window.addEventListener("load",function(){
-typeWriter()
-  })
-  var i = 0;
-var txt = 'which service do you want  to render?';
-var speed = 100;
-  function typeWriter() {
-if (i < txt.length) {
-  document.getElementById("buy").innerHTML += txt.charAt(i);
-  i++;
-  setTimeout(typeWriter, speed);
-}
-}
-        </script>
-        
-      <script src="/jquery/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+            const joinBtn = document.querySelector('.join');
+            const imageSection = document.querySelector('.image-info');
+            const contSection = document.querySelector('#cont');
 
+            if (joinBtn) {
+                joinBtn.addEventListener('click', function () {
+                    imageSection.style.display = 'none';
+                    contSection.style.display = 'block';
+                });
+            }
+        });
+
+        window.addEventListener('load', function () {
+            typeWriter();
+        });
+        var i = 0;
+        var txt = 'Which service do you want to render?';
+        var speed = 60;
+        function typeWriter() {
+            const el = document.getElementById('buy');
+            if (i < txt.length && el) {
+                el.innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+    </script>
+
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
 </body>
 </html>

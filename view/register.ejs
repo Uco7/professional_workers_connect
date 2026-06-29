@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/register..css">
+    <link rel="stylesheet" href="/css/register.css">
     <title>Registration Page</title>
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -15,15 +15,13 @@
             <div class="mb-3 role">
                 <select class="form-select" id="role" name="role" required>
                     <option value="">Register As</option>
-                   
                     <option value="labTechnician">Lab Technician</option>
                     <option value="doctor">Doctor</option>
-                    <option value="patient">Patience</option>
+                    <option value="patient">Patient</option>
                     <option value="admin">Admin</option>
                 </select>
             </div>
             <div class="row mb-3">
-              
                 <div class="col-md-4">
                     <label for="first_name" class="form-label">First Name:</label>
                     <input type="text" class="form-control" id="first_name" name="fName" required>
@@ -41,18 +39,16 @@
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
                 <div class="col-md-4">
-                    <label for="password" class="form-label">Confirm Password:</label>
+                    <label for="cpassword" class="form-label">Confirm Password:</label>
                     <input type="password" class="form-control" id="cpassword" required>
-                    <button id="show" style="background-color: brown; color: aliceblue; border: 2px;">show</button>
+                    <button id="show" type="button" style="background-color: brown; color: aliceblue; border: 2px;">show</button>
                 </div>
                 <div class="col-md-4" id="phoneDiv">
                     <label for="phone_no" class="form-label">Phone Number:</label>
                     <input type="text" class="form-control" id="phone_no" name="phone_no" required>
                 </div>
-               
             </div>
-   
-         
+
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="address" class="form-label">Address:</label>
@@ -82,17 +78,16 @@
                     <label for="profile_image" class="form-label">Upload Passport:</label>
                     <input type="file" class="form-control" id="profile_image" name="profileImage" accept="image/*" required>
                 </div>
-              
             </div>
-        
+
             <div class="center">
                 <button type="submit" class="btn btn-primary">Register</button>
             </div>
         </form>
     </div>
 
-    <script src="jquery/jquery.min.js"></script>
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/js/register.js"></script>
 </body>
 </html>

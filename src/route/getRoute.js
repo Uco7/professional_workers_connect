@@ -1,27 +1,13 @@
-<<<<<<< HEAD
-const getRoute=require("express").Router()
-const pagerender=require("../render/pages")
-getRoute.get("/",pagerender.homePage)
-getRoute.get("/registration/page",pagerender.registerPage)
-getRoute.get("/login/page",pagerender.loginPage)
-getRoute.get("/labTechs/dashbord",pagerender.labtechDashbord)
-getRoute.get("/doctors/dashbord",pagerender.docDashbord)
-getRoute.get("/patients/dashbord",pagerender.patientDashbord)
-getRoute.get("/patients/profile/page",pagerender.patientpProfile)
-getRoute.get("/patients/purchased/card/page",pagerender. patientPurchaseCard)
-getRoute.get("/admin/dashbord",pagerender.adminDashbord)
 
-module.exports=getRoute
- 
-=======
 const getPage=require("express").Router()
 const page=require("../service/pageRender")
 const crudauthcont=require("../controller/crudeCont")
 const {verifyUserToken,verifyAdminToken}=require("../helperMildware/jwtToken")
 getPage.get("/",page.homePage)
-getPage.get("/index/page",verifyUserToken,page.indexPage)
+getPage.get("/index/page",verifyUserToken, page.indexPage)
 getPage.get("/user/registration/page",page.userReg)
 getPage.get("/user/login/page",page.loginUser)
+getPage.get("/login/page",page.loginUser)
 getPage.get("/admin/login/page",page.loginAdmin)
 getPage.get("/vendor/upload/work/page",page.vendorUploadedWorkPage)
 getPage.get("/view/vendor/upload/work/page",page.vendorWorkPage)
@@ -47,4 +33,3 @@ getPage.get("/admin/find/registered/vendor/page",crudauthcont.adminFindVendor)
 // crude auth functionality.module.........................................
 
 module.exports=getPage
->>>>>>> ef55d82 (committing workers connect  first time)

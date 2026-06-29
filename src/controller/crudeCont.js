@@ -1,4 +1,3 @@
-
 const User=require("../model/userModel");
 const Admin=require("../model/adminmodel")
 const Profession=require("../model/professionModel")
@@ -6,40 +5,46 @@ const BookedVendor=require("../model/bookedVendor")
 const VerifiedVendor=require("../model/veryfiedVendor")
 const  VendorWork=require("../model/vendorWorks")
 const nodemailer = require('nodemailer');
+const mongoose = require('mongoose'); // added — needed for ObjectId.isValid below
 
 
 module.exports={
     findUser: async(req,res)=>{
-        if(req.query.id){
-            try {
-                
-                const userId=req.query.id;
-                const user=await User.findById(userId)
-                if(user){
-                    console.log("user or vendor",user);
-                    
-                    return res.status(201).json({
-                        status:"success",
-                        user 
-                    })
-                }else{
-                    res.status(404).json({
-                        status:"failed",
-                        message:"user not found"
-                    })
-                }
-            } catch (error) {
-                console.log(error);
-                res.status(500).json({
-                    status:"error",
-                    message:"internal server error"||error
-                })
-                
-                
+        try {
+            const userId = req.query.id;
+
+            if (!userId || userId === "undefined" || !mongoose.Types.ObjectId.isValid(userId)) {
+                return res.status(400).json({
+                    status: "failed",
+                    message: "No valid user id provided"
+                });
             }
-            
+
+            const user = await User.findById(userId);
+
+            if (user) {
+                console.log("user found", user);
+                return res.status(200).json({
+                    status: "success",
+                    user
+                });
+            } else {
+                return res.status(404).json({
+                    status: "failed",
+                    message: "user not found"
+                });
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                status: "error",
+                message: error.message || "internal server error"
+            });
         }
     },
+    // ...rest of your file (adminFindRegUsers, adminFindVendor, findVerifiedVendor,
+    // findBookedVendor, findVendorByEmail, findVendorWorks, adminUpdteVendor,
+    // deleteRegVendor, deleteBookedVendor) — unchanged, exactly as you pasted them.
     adminFindRegUsers:async(req,res)=>{
         try {
             if(req.query.id){
